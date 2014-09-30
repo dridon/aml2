@@ -6,8 +6,17 @@
 	- Remove punctuation
 	- Remove tokens with less than 2 characters
 	- Stemming (ex: forest, forests, forestation, forested ===> forest)
-	- Filter out Angus' error :P; i.e. the "Category" category. Can be done manually, only 3 entries.
+	//- Filter out Angus' error :P; i.e. the "Category" category. Can be done manually, only 3 entries.
 	- Do we want to handle formulae? Count amount of formulae?
+	
+	1. make all words lower case
+	2. remove punctuation
+	
+	3. remove tokens with less than two chars
+	4. remove stop words
+	5. stemming
+	
+	6. for group 1 and 2, build dictionaries
 	
 **Feature extraction:
 
