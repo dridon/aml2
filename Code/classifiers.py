@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
+from sklearn.ensemble import RandomForestClassifier
 
 #My implementation is not efficient! Might need to optimize when we use the real dataset.
 class NaiveBayes:
@@ -12,14 +13,13 @@ class NaiveBayes:
         The classes must be 0 indexed.
         Alpha is used for Laplace smoothing. We could cross-validate over this guy.
         """    
-        labels_column_index = len(dataset[0]) - 1
-        dataset = dataset[dataset[:,labels_column_index].argsort()] # Sort the dataset by classes.
+        dataset = dataset[dataset[:,-1].argsort()] # Sort the dataset by classes.
         #print dataset
         
         ########
         # Compute p(y=1) for all ys.
         ########
-        label_counts = np.bincount(dataset[:,labels_column_index]) # Get the number of occurrences of each class, sorted.  
+        label_counts = np.bincount(dataset[:,-1]) # Get the number of occurrences of each class, sorted.  
         self.p_ys = label_counts * 1.0 / len(dataset) # Compute probs. 
        
         ########
@@ -96,35 +96,53 @@ class NaiveBayes:
                 
             predictions[i] = np.argmax(class_predictions)  # Prediction is class with highest probability.
             
-        return predictions      
+        return predictions    
+   
+# Not finished yet. Working on it.         
+class RandomForest():
+    def __init__(self):        
+        self.random_forest = RandomForestClassifier()#set params here
         
-    def toy_data(self):
-        """
-        Create random dataset for testing purposes.
-        Columns 0 to 4 contain the features, and 5 the labels.
-        """ 
-        #dataset = np.zeros((10,5), np.int)
-        dataset = np.array([[0,0,0,0,4],
-                           [0,0,0,0,5],
-                           [1,3,0,0,0],
-                           [3,1,0,0,1],
-                           [0,0,6,2,0],
-                           [0,0,0,0,0],
-                           [0,0,1,7,2],                           
-                           [0,0,5,1,5],
-                           [0,0,34,0,0],
-                           [0,0,3,0,0]])
-        Y = np.array([3,3,2,2,1,0,1,1,0,0])
-        #for i in range(10):
-            #for j in range(5):
-                #dataset[i][j] = np.random.randint(0,10)  
-        dataset = np.column_stack((dataset, Y))
-        return (dataset)       
+    def train(self, dataset):
+        self.random_forest.fit(dataset[:,:-1], dataset[:,-1])
+        
+    def test(self, dataset):
+        return self.random_forest.score(dataset[:,:-1], dataset[:,-1])
+        
+    def predict(self, samples):
+        self.random_forest.predict(samples)
+
+def toy_data():
+    """
+    Create random dataset for testing purposes.
+    Columns 0 to 4 contain the features, and 5 the labels.
+    """ 
+    #dataset = np.zeros((10,5), np.int)
+    dataset = np.array([[0,0,0,0,4],
+                       [0,0,0,0,5],
+                       [1,3,0,0,0],
+                       [3,1,0,0,1],
+                       [0,0,6,2,0],
+                       [0,0,0,0,0],
+                       [0,0,1,7,2],                           
+                       [0,0,5,1,5],
+                       [0,0,34,0,0],
+                       [0,0,3,0,0]])
+    Y = np.array([3,3,2,2,1,0,1,1,0,0])
+    #for i in range(10):
+        #for j in range(5):
+            #dataset[i][j] = np.random.randint(0,10)  
+    dataset = np.column_stack((dataset, Y))
+    return (dataset)       
 
 # Testing
-c = NaiveBayes()
-dataset = c.toy_data()
-c.train(dataset,1)   
-predictions = c.predict(dataset)  
-print predictions
+#c = NaiveBayes()
+dataset = toy_data()
+#c.train(dataset,1)   
+#predictions = c.predict(dataset)  
+#print predictions
+f = RandomForest()
+f.train(dataset)
+print f.test(dataset)
+
    
