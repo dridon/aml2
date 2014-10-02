@@ -7,6 +7,7 @@ def read_csv(file_name, d=",", ignore_header=True):
   """
   f = open(file_name, "r")
   rows = csv.reader(f, delimiter = d)
+  if ignore_header: next(rows)
   return  [ r for r in rows ] 
 
 def list2dict(l, key_col): 
