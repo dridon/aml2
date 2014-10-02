@@ -4,7 +4,108 @@ from sklearn.ensemble import RandomForestClassifier
 from math import log
 
 #My implementation is not efficient! Might need to optimize when we use the real dataset.
-class NaiveBayes:
+class NaiveBayesBinary:
+    
+    def __init__(self, alpha = 1):
+        """       
+        Alpha is used for Laplace smoothing. We could cross-validate over this guy.
+        Typical values ]0,1]
+        """  
+        self.alpha = alpha
+    
+    def train(self, dataset):
+        """
+        Train the Naive Bayes classifier.
+        Takes a dataset of ints with one sample per row,
+        with the sample's label at the last column. 
+        The classes must be 0 indexed.
+        Alpha is used for Laplace smoothing. We could cross-validate over this guy.
+        """    
+        dataset = dataset[dataset[:,-1].argsort()] # Sort the dataset by classes.
+        #print dataset
+        
+        ########
+        # Compute p(y=1) for all ys.
+        ########
+        label_counts = np.bincount(dataset[:,-1]) # Get the number of occurrences of each class, sorted.  
+        self.p_ys = label_counts * 1.0 / len(dataset) # Compute probs. 
+       
+        ########
+        # Compute p(x|y) for all x,y.
+        ########
+        self.feature_count = len(dataset[0]) - 1 
+        self.class_count = len(label_counts)
+        
+        self.p_xi_given_ys = np.zeros((self.class_count, self.feature_count))   # Initialize matrix
+        start_index = 0
+        for i in range(self.class_count):  # Loop over each class          
+            end_index = start_index + label_counts[i] # end of this class index   
+            denominator = label_counts[i] + 2.0 * self.alpha
+            
+            for j in range(self.feature_count):  # Loop over each feature
+                numerator = np.sum(dataset[start_index:end_index,j]) + self.alpha # Sum number of times word j = 1 in class i
+                self.p_xi_given_ys[i][j] = numerator * 1.0 / denominator    # Compute p(xi|y)
+            
+            start_index = end_index
+            
+    def test(self, samples):
+        """
+        Compute P(y|x) for each class, 
+        and select the class with highest probability. 
+        Return the array of prediction errors (0:good/1:error),
+        the predicted classes and the prediction accuracy."""
+        prediction_errors = np.zeros(len(samples), int)
+        predictions = np.zeros(len(samples), int)
+        class_predictions = np.zeros(self.class_count)
+        
+        for i in range(len(samples)):    # Loop over each sample
+            for j in range(self.class_count):   # Loop over each class
+                class_predictions[j] = self.p_ys[j]   # Get p(y) for class j
+                for k in range(self.feature_count): # Loop over each feature                
+                    # Multiply p(y) by p(xi|y)       
+                    if(samples[i][k] == 1):
+                        class_predictions[j] *= self.p_xi_given_ys[j][k] 
+                    else:
+                        class_predictions[j] *= 1 - self.p_xi_given_ys[j][k]   
+                    
+            predictions[i] = np.argmax(class_predictions)  # Prediction is class with highest probability.
+            
+            # Check if the predicted class doesn't match the true class.
+            if(predictions[i] != samples[i][-1]):
+                prediction_errors[i] = 1     
+                
+        # Compute accuracy
+        accuracy = 1.0 - (np.sum(prediction_errors) * 1.0 / len(prediction_errors))      
+            
+        return prediction_errors, predictions, accuracy    
+    
+    def predict(self, samples):
+        """
+        Compute P(y|x) for each class, 
+        and select the class with highest probability. 
+        Return the array of class predictions.
+        """
+        predictions = np.zeros(len(samples), int)
+        class_predictions = np.zeros(self.class_count)
+        
+        for i in range(len(samples)):    # Loop over each sample
+            for j in range(self.class_count):   # Loop over each class
+                class_predictions[j] = self.p_ys[j]   # Get p(y) for class j
+                for k in range(self.feature_count):     # Loop over each feature                        
+                    # Multiply p(y) by p(xi|y)       
+                    if(samples[i][k] == 1):
+                        class_predictions[j] *= self.p_xi_given_ys[j][k] 
+                    else:
+                        class_predictions[j] *= 1 - self.p_xi_given_ys[j][k]   
+                
+            predictions[i] = np.argmax(class_predictions)  # Prediction is class with highest probability.
+            
+        return predictions    
+         
+
+
+#My implementation is not efficient! Might need to optimize when we use the real dataset.
+class NaiveBayesMultinomial:
     
     def __init__(self, alpha = 1):
         """       
@@ -141,7 +242,7 @@ class RandomForest():
         """  
         return self.random_forest.predict(samples)
 
-def toy_data():
+def multiclass_toy_data():
     """
     Create random dataset for testing purposes.
     Columns 0 to 4 contain the features, and 5 the labels.
@@ -162,6 +263,4 @@ def toy_data():
         #for j in range(5):
             #dataset[i][j] = np.random.randint(0,10)  
     dataset = np.column_stack((dataset, Y))
-    return (dataset)       
-
-   
+    return (dataset) 

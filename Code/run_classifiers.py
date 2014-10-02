@@ -3,7 +3,7 @@
 from numpy import genfromtxt, newaxis
 import numpy as np
 from sklearn.metrics import confusion_matrix
-from classifiers import NaiveBayes, RandomForest, toy_data
+from classifiers import *
 from sklearn.cross_validation import StratifiedKFold
 import matplotlib.pyplot as plt
 
@@ -77,13 +77,15 @@ if __name__ == "__main__":
     # Testing    
     training_set, validation_set = get_k_fold_partition(dataset, 5)
     #print training_set
-    #print validation_set         
+    #print validation_set    
+         
+    print " "            
     
-    print "Training the NB classifier..."   
-    c = NaiveBayes() 
-    c.train(training_set)       
-    print "Testing the NB classifier..."  
-    errors, predictions, accuracy = c.test(validation_set)
+    print "Training the Multinomial NB classifier..."   
+    nbm = NaiveBayesMultinomial() 
+    nbm.train(training_set)       
+    print "Testing the Multinomial NB classifier..."  
+    errors, predictions, accuracy = nbm.test(validation_set)
     print "NB accuracy: ", accuracy 
     print "NB confusion matrix:" 
     get_confusion_matrix(validation_set[:,-1], predictions)
