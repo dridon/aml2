@@ -8,19 +8,21 @@ from pygments.lexer import RegexLexer, include, bygroups, using
 from pygments.token import Punctuation, Text, Comment, Keyword, Name, String, \
          Generic, Operator, Number, Whitespace, Literal, Token
 
+Stopword = Token.Stopword
+Equation = Token.Equation
+Word = Token.Word
+
 class EnglishLexer(RegexLexer):
   """ 
     Lexer for English Language
   """
 
   name = "English Words"
-  Stopword = Token.Stopword
-  Word = Token.Word
   
   tokens = {
       'root': [
         (r'[,\.;\:\'\"\?\-]', Punctuation),
-        (r'\s', Whitespace),
+        (r'\s', Whitespace, "#pop"),
         (r'\w+', Word),
         (r'the|with|to|for|a|we', Stopword),
         (r'[^,!\.;:\'\"\?]+', Text),
@@ -35,7 +37,6 @@ class AbstractsLexer(RegexLexer):
 
   name = "Abstract"
 
-  Equation = Token.Equation
   
   tokens = {
       'general': [
@@ -94,7 +95,7 @@ def get_tokens(s):
   return l
 
 
-def tokenize_list(l, col):
+def tokenize_list(l, col, verbose=True):
   """
     Takes a 2D list and a col to tokenize in the list and returns a new list 
     that is a mirror of the argument list except the col column is replaced 
@@ -102,8 +103,13 @@ def tokenize_list(l, col):
   """
   t = [] 
   i = 1 
+  only_two = len(l[0] ==  2)
   for row in l: 
-    if i % 1000 == 0 : print "Tokenized " + str(i)
-    t.append([get_tokens(row[col]), row[:col] + row[col +1:]])
+    if i % 1000 == 0 and verbose: print "Tokenized " + str(i)
+
+    if only_two:
+      t.append([get_tokens(row[col]), row[0] if col > 0 else row[1])
+    else:
+      t.append([get_tokens(row[col]), row[:col] + row[col +1:]])
     i = i + 1 
   return t
