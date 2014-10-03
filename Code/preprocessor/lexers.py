@@ -11,6 +11,7 @@ from pygments.token import Punctuation, Text, Comment, Keyword, Name, String, \
 Stopword = Token.Stopword
 Equation = Token.Equation
 Word = Token.Word
+SpecialCharacter = Token.SpecialCharacter
 
 class EnglishLexer(RegexLexer):
   """ 
@@ -21,8 +22,9 @@ class EnglishLexer(RegexLexer):
   
   tokens = {
       'root': [
-        (r'[,\.;\:\'\"\?\-]', Punctuation),
-        (r'\s', Whitespace, "#pop"),
+        (r'[,\.;\:\'\"\?\-\(\)\[\]\/`\*\+\|=><#\~@\\]', Punctuation),
+        (r'\\', SpecialCharacter),
+        (r'\s', Whitespace),
         (r'\w+', Word),
         (r'the|with|to|for|a|we', Stopword),
         (r'[^,!\.;:\'\"\?]+', Text),
@@ -36,7 +38,6 @@ class AbstractsLexer(RegexLexer):
   """
 
   name = "Abstract"
-
   
   tokens = {
       'general': [
@@ -89,7 +90,14 @@ def get_tokens(s):
   for token in al.get_tokens(s): 
     if token[0] is Token.Text:
       for t in el.get_tokens(token[1]):
-        l.append(t)
+        if(t[0] is not Whitespace):
+          l.append(t)
+
+          # some weird unicode character gets through, this hack takes care of it
+          if(t[0] is Token.Text):
+            for t1 in el.get_tokens(t[1][1:]):
+              if(t1[0] is not Whitespace):
+                l.append(t1)
     else:
       l.append(token)
   return l
@@ -103,12 +111,12 @@ def tokenize_list(l, col, verbose=True):
   """
   t = [] 
   i = 1 
-  only_two = len(l[0] ==  2)
+  only_two = len(l[1])  ==  2
   for row in l: 
     if i % 1000 == 0 and verbose: print "Tokenized " + str(i)
 
     if only_two:
-      t.append([get_tokens(row[col]), row[0] if col > 0 else row[1])
+      t.append([get_tokens(row[col]), row[0] if col > 0 else row[1]])
     else:
       t.append([get_tokens(row[col]), row[:col] + row[col +1:]])
     i = i + 1 
