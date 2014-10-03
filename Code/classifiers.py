@@ -22,13 +22,15 @@ class NaiveBayesBinary:
         Alpha is used for Laplace smoothing. We could cross-validate over this guy.
         """    
         dataset = dataset[dataset[:,-1].argsort()] # Sort the dataset by classes.
-        #print dataset
+        print dataset
         
         ########
         # Compute p(y=1) for all ys.
         ########
         label_counts = np.bincount(dataset[:,-1]) # Get the number of occurrences of each class, sorted.  
+        print label_counts
         self.p_ys = label_counts * 1.0 / len(dataset) # Compute probs. 
+        print self.p_ys
        
         ########
         # Compute p(x|y) for all x,y.
