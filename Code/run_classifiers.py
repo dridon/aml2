@@ -72,11 +72,8 @@ def get_k_fold_partition(dataset, k = 5):
     
 if __name__ == "__main__":    
    
-    #dataset = load_dataset("Training.csv", int)       
-    dataset = multiclass_toy_data()
-
-    print dataset
-
+    dataset = load_dataset("Training.csv", int)       
+    
     # Testing    
     training_set, validation_set = get_k_fold_partition(dataset, 5)
     #print training_set
@@ -85,23 +82,23 @@ if __name__ == "__main__":
     print " "            
     
     print "Training the Multinomial NB classifier..."   
-    nbm = NaiveBayesBinary() 
+    nbm = NaiveBayesMultinomial() 
     nbm.train(training_set)       
     print "Testing the Multinomial NB classifier..."  
     errors, predictions, accuracy = nbm.test(validation_set)
     print "NB accuracy: ", accuracy 
-    #print "NB confusion matrix:" 
-    #get_confusion_matrix(validation_set[:,-1], predictions)
+    print "NB confusion matrix:" 
+    get_confusion_matrix(validation_set[:,-1], predictions)
      
     print " "
      
-    #print "Training the RF classifier..."     
-    #f = RandomForest()
-    #f.train(training_set)
-    #print "Testing the RF classifier..." 
-    #predictions, accuracy = f.test(validation_set)
-    #print "RF accuracy: ", accuracy 
-    #print "RF confusion matrix:"
-    #get_confusion_matrix(validation_set[:,-1], predictions)
+    print "Training the RF classifier..."     
+    f = RandomForest()
+    f.train(training_set)
+    print "Testing the RF classifier..." 
+    predictions, accuracy = f.test(validation_set)
+    print "RF accuracy: ", accuracy 
+    print "RF confusion matrix:"
+    get_confusion_matrix(validation_set[:,-1], predictions)
     
     
