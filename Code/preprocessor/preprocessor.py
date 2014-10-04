@@ -14,7 +14,7 @@ class PreProcessor():
   ft_data = None
   top_words = None
   
-  def __init__(self, unprocessed_data, accept_filters = None, reject_filters = None, transforms = None, top_word_count = 100): 
+  def __init__(self, unprocessed_data, accept_filters = None, reject_filters = None, transforms = None, top_word_count = 100, stem=False): 
     if accept_filters is not None: 
       self.accept_filters = accept_filters 
 
@@ -25,7 +25,7 @@ class PreProcessor():
       self.transforms = transforms
 
     self.unprocessed_data = list(unprocessed_data)
-    self.tokenized_data = lx.tokenize_list(unprocessed_data, 0, verbose=True)
+    self.tokenized_data = lx.tokenize_list(unprocessed_data, 0, verbose=True, stem=stem)
     self.top_word_count = top_word_count
 
     """

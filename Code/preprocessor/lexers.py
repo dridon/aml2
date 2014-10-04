@@ -8,6 +8,7 @@ from pygments.lexer import RegexLexer, include, bygroups, using
 from pygments.token import Punctuation, Text, Comment, Keyword, Name, String, \
          Generic, Operator, Number, Whitespace, Literal, Token
 import StringIO
+from stemming.porter2 import stem
 
 Stopword = Token.Stopword
 Equation = Token.Equation
@@ -103,8 +104,13 @@ class AbstractsLexer(RegexLexer):
         (r'', Text, '#pop'),
         ],
       }
+def stem_token(t): 
+  if t[0] is Word:
+    return (t[0], stem(t[1]))
+  else:
+    return t
 
-def get_tokens(s):
+def get_tokens(s, stem = False):
   """
     Generates tokens for a given string
   """
@@ -116,19 +122,25 @@ def get_tokens(s):
     if token[0] is Token.Text:
       for t in el.get_tokens(token[1]):
         if(t[0] is not Whitespace):
-          l.append(t)
+          if stem:
+            l.append(stem_token(t))
+          else:
+            l.append(t)
 
           # some weird unicode character gets through, this hack takes care of it
           if(t[0] is Token.Text):
             for t1 in el.get_tokens(t[1][1:]):
               if(t1[0] is not Whitespace):
-                l.append(t1)
+                if stem:
+                  l.append(stem_token(t1))
+                else:
+                  l.append(t1)
     else:
       l.append(token)
   return l
 
 
-def tokenize_list(l, col, verbose=True):
+def tokenize_list(l, col, verbose=True, stem=False):
   """
     Takes a 2D list and a col to tokenize in the list and returns a new list 
     that is a mirror of the argument list except the col column is replaced 
@@ -142,8 +154,8 @@ def tokenize_list(l, col, verbose=True):
     if i % 1000 == 0 and verbose: print "\tcompleted " + str(i) + " samples"
 
     if only_two:
-      t.append([get_tokens(row[col]), row[0] if col > 0 else row[1]])
+      t.append([get_tokens(row[col], stem), row[0] if col > 0 else row[1]])
     else:
-      t.append([get_tokens(row[col]), row[:col] + row[col +1:]])
+      t.append([get_tokens(row[col], stem), row[:col] + row[col +1:]])
     i = i + 1 
   return t

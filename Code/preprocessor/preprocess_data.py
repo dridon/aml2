@@ -27,11 +27,21 @@ n = 1000
 # Toggle this boolean if you want to save to csvs 
 save2csv = True 
 
+# This toggles stemming 
+stemming = False
+
 # Dictionary output file name and path
 categories_csv = "../../Datasets/processed/categories.csv"
 dict_csv = "../../Datasets/processed/word_count_dictionary.csv"
 sample_counts_csv = "../../Datasets/processed/sample_counts.csv"
 sample_booleans_csv = "../../Datasets/processed/sample_booleans.csv"
+
+# files for stemming output
+# categories_csv = "../../Datasets/processed/categories_stemmed.csv"
+# dict_csv = "../../Datasets/processed/word_count_dictionary_stemmed.csv"
+# sample_counts_csv = "../../Datasets/processed/sample_counts_stemmed.csv"
+# sample_booleans_csv = "../../Datasets/processed/sample_booleans_stemmed.csv"
+
 
 """
 Code, you shouldn't really need to touch this unless there's something very
@@ -45,12 +55,11 @@ outputs = merge.read_csv(output_file_name)
 merged = merge.merge_list(inputs, outputs, 0, 0)
 
 # create the preprocessor
-pp = prp.PreProcessor(merged, accepts, rejects, tfms, n)
+pp = prp.PreProcessor(merged, accepts, rejects, tfms, n, stem=stemming)
 
 # save to csv if needed
 if save2csv: 
   categories = pp.get_categories() 
-  print categories.items()
   worddict = pp.word_dict()
   sample_counts = pp.sample_counts() 
   sample_booleans = pp.sample_booleans()
