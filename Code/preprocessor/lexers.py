@@ -25,7 +25,7 @@ class EnglishLexer(RegexLexer):
         (r'[,\.;\:\'\"\?\-\(\)\[\]\/`\*\+\|=><#\~@\\]', Punctuation),
         (r'\\', SpecialCharacter),
         (r'\s', Whitespace),
-        (r'is|the|with|to|for|a|we', Stopword),
+        (r' is | the | with | to | for | a | we', Stopword),
         (r'\w+', Word),
         (r'[^,!\.;:\'\"\?]+', Text),
         ],
