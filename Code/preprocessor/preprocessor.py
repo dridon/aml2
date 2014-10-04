@@ -150,7 +150,7 @@ class PreProcessor():
     # # get the most commonly occurring words
     self.top_words = self.most_occurring_words()
 
-    print "get sample counts..." 
+    print "getingt sample counts..." 
     # # get a list of the counts of the samples
     self.processed = self.sample_counts(force=True)
 
@@ -183,15 +183,26 @@ class PreProcessor():
     """
       Returns the word counts of the top most occurring words over all samples
     """
+    def reset_dict_counts(d): 
+      for k in d.iterkeys(): 
+        d[k] = 0 
+
     if self.ft_data is None or self.top_words is None: return None
     if not force: return self.processed
 
     samples = [] 
     samples.append(self.top_words + ["category"])
     i = 1
+    
+    collector = OrderedDict() 
+    for w in self.top_words: 
+      collector[w] = 0 
+
     for row in self.ft_data: 
       sample = row[0]
-      samples.append(self.counter.str_word_counts(sample, self.top_words) + [self.get_category(row[1])])
+      self.counter.str_word_counts(sample, collector)
+      samples.append(collector.values() + [self.get_category(row[1])])
+      reset_dict_counts(collector)
       if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
       i = i + 1 
     return samples

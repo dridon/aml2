@@ -70,12 +70,11 @@ class WordCounter:
     """
     words = self.get_word_counts() 
     return len(words.keys())
-  
+
   def str_word_counts(self, l, kws): 
     """
       For all the words in kws, it gets the counts of those words in l
     """
-    d = {} 
     for word in l: 
-      self.load_word(word, d)
-    return [ d[w] if w in d else 0 for w in kws ] 
+      if word in kws: 
+        kws[word] = kws[word] + 1 
