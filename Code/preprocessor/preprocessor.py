@@ -25,8 +25,17 @@ class PreProcessor():
       self.transforms = transforms
 
     self.unprocessed_data = list(unprocessed_data)
-    self.tokenized_data = lx.tokenize_list(unprocessed_data, 0, verbose=False)
+    self.tokenized_data = lx.tokenize_list(unprocessed_data, 0, verbose=True)
     self.top_word_count = top_word_count
+
+    """
+      This value is hard coded to keep things consistent during runs, it should 
+      be removed in the final version
+    """
+    self.get_category('cs')
+    self.get_category('stat')
+    self.get_category('physics')
+    self.get_category('math')
 
     self.process_data()
 
@@ -93,6 +102,7 @@ class PreProcessor():
     """
     td = self.tokenized_data
     ft = []
+    i = 1 
     for row in td: 
       l = []
       for token in row[0]:
@@ -100,6 +110,8 @@ class PreProcessor():
           if w is not None:
             l.append(w)
       ft.append([l, row[1]])
+      if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
+      i = i + 1
     return ft
 
   def filter_and_transform(self, accept_filters, reject_filters, transforms): 
@@ -120,21 +132,29 @@ class PreProcessor():
 
     if self.processed is not None and not force: return self.processed
 
+    print "processing data..."
+
     # first filter and transform the the abstracts to words we want
+    print "filtering data..."
     self.ft_data = self.filter_and_transform_list()
 
+    print "generating word counts..."
     # # helper that eases processing of data
     self.counter = wc.WordCounter(self.ft_data)
 
+    print "creating word dictionary..."
     # # get the word count dictionary 
     self.dictionary = self.word_dict()
 
+    print "getting most occurring words..."
     # # get the most commonly occurring words
     self.top_words = self.most_occurring_words()
 
+    print "get sample counts..." 
     # # get a list of the counts of the samples
     self.processed = self.sample_counts(force=True)
 
+    print "getting sample booleans..." 
     # # booleans of processed values
     self.processed_booleans = self.sample_booleans(force=True)
 
@@ -152,7 +172,10 @@ class PreProcessor():
       transformed otherwise None
     """
     n = n if n is not None else self.top_word_count
+
     if self.counter is None: return None
+
+    n = n if self.top_word_count != -1 else self.counter.max_words()
 
     return self.counter.most_occurring(self.top_word_count)
 
@@ -165,9 +188,12 @@ class PreProcessor():
 
     samples = [] 
     samples.append(self.top_words + ["category"])
+    i = 1
     for row in self.ft_data: 
       sample = row[0]
       samples.append(self.counter.str_word_counts(sample, self.top_words) + [self.get_category(row[1])])
+      if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
+      i = i + 1 
     return samples
 
   def sample_booleans(self, force=False): 
@@ -180,6 +206,9 @@ class PreProcessor():
 
     samples = iter(self.processed) 
     bool_samples = [next(samples)]
+    i = 1
     for row in samples:
       bool_samples.append([ c > 0 for c in row[:-1]] + [row[-1]])
+      if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
+      i = i + 1 
     return bool_samples

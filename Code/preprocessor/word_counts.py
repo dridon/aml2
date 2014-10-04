@@ -28,9 +28,13 @@ class WordCounter:
       Gets the counts of all the words in the data 
     """
     if self.word_counts is None: 
+      print "getting word counts..."
       self.word_counts = {}
 
+      i = 1
       for row in self.data:
+        if i % 1000 == 0: print "\tcompleted " + str(i) + " samples"
+        i = i + 1 
         for word in row[0]: 
           self.load_word(word, self.word_counts)
 
@@ -43,6 +47,8 @@ class WordCounter:
     """
     if self.ordered_counts is None and not force: 
       d = self.get_word_counts()
+
+      print "ordering word counts..."
       pairs = sorted(d.items(), key = lambda x: x[1], reverse=True)
       self.ordered_counts = OrderedDict() 
 
