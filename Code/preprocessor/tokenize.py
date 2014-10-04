@@ -8,4 +8,4 @@ inputs = merge.read_csv(input_file_name)
 outputs = merge.read_csv(output_file_name) 
 merged = merge.merge_list(inputs, outputs, 0, 0)
 
-tokenized_list = lx.tokenize_list(merged, 0)
+tokenized_list = lx.tokenize_list(merged, 0, verbose=False)
