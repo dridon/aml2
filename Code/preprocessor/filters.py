@@ -3,7 +3,7 @@
 """
 
 from pygments.token import Token 
-import lexers
+import lexers as lx
 
 def words(v): 
   return v[0] == Token.Word
@@ -14,5 +14,5 @@ def punctuations(v):
 def stop_words(v): 
   return v[0] == Token.Stopword
 
-def lt_two_chars(v): 
-  return len(v[1]) < 2
+def lt_three_chars(v): 
+  return len(v[1]) < 3
