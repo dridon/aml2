@@ -2,6 +2,7 @@
   Contains filters for clearing out tokens 
 """
 
+from pygments.token import Token 
 import lexers
 
 def words(v): 
@@ -13,5 +14,5 @@ def punctuations(v):
 def stop_words(v): 
   return v[0] == Token.Stopword
 
-def gt_two_chars(v): 
-  return len(v[1]) > 2
+def lt_two_chars(v): 
+  return len(v[1]) < 2
