@@ -7,11 +7,35 @@
 from pygments.lexer import RegexLexer, include, bygroups, using
 from pygments.token import Punctuation, Text, Comment, Keyword, Name, String, \
          Generic, Operator, Number, Whitespace, Literal, Token
+import StringIO
 
 Stopword = Token.Stopword
 Equation = Token.Equation
 Word = Token.Word
 SpecialCharacter = Token.SpecialCharacter
+
+stop_words = ["a","able","about","across","after","all","almost","also","am","among","an","and","any","are","as","at","be","because","been","but","by","can","cannot","could","dear","did","do","does","either","else","ever","every","for","from","get","got","had","has","have","he","her","hers","him","his","how","however","i","if","in","into","is","it","its","just","least","let","like","likely","may","me","might","most","must","my","neither","no","nor","not","of","off","often","on","only","or","other","our","own","rather","said","say","says","she","should","since","so","some","than","that","the","their","them","then","there","these","they","this","tis","to","too","twas","us","wants","was","we","were","what","when","where","which","while","who","whom","why","will","with","would","yet","you","your"]
+def get_stop_words_regex(): 
+  s = StringIO.StringIO() 
+
+  sws = [] 
+  for w in stop_words: 
+    sws.append(w.lower()) 
+    sws.append(w.upper()) 
+    sws.append(w.capitalize())
+    if w not in sws: sws.append(w)
+
+  for i in range(len(sws)):
+    w = sws[i]
+    s.write("\\s" + w + "\\s" + "|")
+    s.write(w + "\\s" + "|")
+
+    if i == len(sws) - 1:
+      s.write("\\s" + w)
+    else: 
+      s.write("\\s" + w + "|")
+  return s.getvalue()
+swreg = get_stop_words_regex()
 
 class EnglishLexer(RegexLexer):
   """ 
@@ -25,7 +49,8 @@ class EnglishLexer(RegexLexer):
         (r'[,\.;\:\'\"\?\-\(\)\[\]\/`\*\+\|=><#\~@\\]', Punctuation),
         (r'\\', SpecialCharacter),
         (r'\s', Whitespace),
-        (r' is | the | with | to | for | a | we', Stopword),
+        # (r'\sthe\s|the\s|\sthe|\sof\s|of\s|\sof|\sin\s|in\s|\sin|\sand\s|and\s|\sand|\sto\s|to\s|\sto|\swe\s|we\s|\swe|\sis\s|is\s|\sis|\sfor\s|for\s|\sfor|\sthat\s|that\s|\sthat|\sthis\s|this\s|\sthis|\sare\s|are\s|\sare|\swith\s|with\s|\swith|\son\s|on\s|\son|\sby\s|by\s|\sby|\sas\s|as\s|\sas|\san\s|an\s|\san|\swhich\s|which\s|\swhich|\sbe\s|be\s|\sbe|\sour\s|our\s|\sour|\sit\s|it\s|\sit|\scan\s|can\s|\scan|\sfrom\s|from\s|\sfrom|\shas\s|has\s|\shas|\shave\s|have\s|\shave', Stopword),
+        (swreg, Stopword),
         (r'\w+', Word),
         (r'[^,!\.;:\'\"\?]+', Text),
         ],
@@ -112,8 +137,9 @@ def tokenize_list(l, col, verbose=True):
   t = [] 
   i = 1 
   only_two = len(l[1])  ==  2
+  print "lexing(generating tokens)..." 
   for row in l: 
-    if i % 1000 == 0 and verbose: print "Tokenized " + str(i)
+    if i % 1000 == 0 and verbose: print "\tcompleted " + str(i) + " samples"
 
     if only_two:
       t.append([get_tokens(row[col]), row[0] if col > 0 else row[1]])
