@@ -36,14 +36,14 @@ class WordCounter:
 
     return dict(self.word_counts)
 
-  def get_ordered_word_counts(self): 
+  def get_ordered_word_counts(self, force = False): 
     """ 
       Gets the counts of all the words in the data in an OrderedDict in 
       descending order of their counts
     """
-    if self.ordered_counts is None: 
+    if self.ordered_counts is None and not force: 
       d = self.get_word_counts()
-      pairs = sorted(d.items(), key = lambda x:x[1], reverse=True)
+      pairs = sorted(d.items(), key = lambda x: x[1], reverse=True)
       self.ordered_counts = OrderedDict() 
 
       for k,v in pairs: 
@@ -56,7 +56,7 @@ class WordCounter:
       Gets the most ocurring the first n most occurring words or all the words
       if n > the number of words
     """
-    return self.ordered_counts().keys()[:n]
+    return self.get_ordered_word_counts().keys()[:n]
 
   def max_words(self): 
     """
@@ -65,7 +65,7 @@ class WordCounter:
     words = self.get_word_counts() 
     return len(words.keys())
   
-  def word_counts(self, l, kws): 
+  def str_word_counts(self, l, kws): 
     """
       For all the words in kws, it gets the counts of those words in l
     """
