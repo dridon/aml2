@@ -8,7 +8,6 @@ import transforms as ts
 import preprocessor as prp 
 import csv
 
-
 """
 Settings, change these to alter script parameters
 """
@@ -35,15 +34,6 @@ categories_csv = "../../Datasets/processed/categories_stemmed.csv"
 dict_csv = "../../Datasets/processed/word_count_dictionary_stemmed.csv"
 fw_csv = "../../Datasets/processed/filtered_words_stemmed.csv"
 aw_csv = "../../Datasets/processed/all_words_stemmed.csv"
-sample_counts_csv = "../../Datasets/processed/sample_counts_stemmed.csv"
-sample_booleans_csv = "../../Datasets/processed/sample_booleans_stemmed.csv"
-
-# files for stemming output
-# categories_csv = "../../Datasets/processed/categories_stemmed.csv"
-# dict_csv = "../../Datasets/processed/word_count_dictionary_stemmed.csv"
-# sample_counts_csv = "../../Datasets/processed/sample_counts_stemmed.csv"
-# sample_booleans_csv = "../../Datasets/processed/sample_booleans_stemmed.csv"
-
 
 """
 Code, you shouldn't really need to touch this unless there's something very
@@ -65,15 +55,11 @@ if save2csv:
   worddict = pp.word_dict()
   ft_words = pp.ft_data
   allwords = pp.top_words
-  # sample_counts = pp.sample_counts() 
-  # sample_booleans = pp.sample_booleans()
 
   cw = csv.writer(open(categories_csv, "w+"))
   ww = csv.writer(open(dict_csv, "w+"))
   fw = csv.writer(open(fw_csv, "w+"))
   aw = csv.writer(open(aw_csv, "w+"))
-  # scw = csv.writer(open(sample_counts_csv, "w+"))
-  # sbw = csv.writer(open(sample_booleans_csv, "w+")) 
 
   cw.writerows(categories.items())
   ww.writerows(worddict.items())
@@ -84,5 +70,3 @@ if save2csv:
 
   for w in allwords: 
     aw.writerow([w])
-  # scw.writerows(sample_counts) 
-  # sbw.writerows(sample_booleans)

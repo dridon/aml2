@@ -1,12 +1,12 @@
 import sample_counter as sc
 import csv
 
-fdf = "../../Datasets/processed/filtered_words.csv"
-awf = "../../Datasets/processed/all_words.csv"
-ctf = "../../Datasets/processed/categories.csv"
+fdf = "../../Datasets/processed/filtered_words_stemmed.csv"
+awf = "../../Datasets/processed/all_words_stemmed.csv"
+ctf = "../../Datasets/processed/categories_stemmed.csv"
 labelled = True
 
-output_file = "/tmp/faiz/aml2/sample_counts.csv"
+output_file = "/tmp/faiz/aml2/sample_counts_stemmed.csv"
 
 fdr = csv.reader(open(fdf, "r"))
 awr = csv.reader(open(awf, "r"))

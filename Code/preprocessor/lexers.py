@@ -8,12 +8,13 @@ from pygments.lexer import RegexLexer, include, bygroups, using
 from pygments.token import Punctuation, Text, Comment, Keyword, Name, String, \
          Generic, Operator, Number, Whitespace, Literal, Token
 import StringIO
-from stemming.porter2 import stem as stemming
+from nltk.stem.snowball import EnglishStemmer
 
 Stopword = Token.Stopword
 Equation = Token.Equation
 Word = Token.Word
 SpecialCharacter = Token.SpecialCharacter
+stemmer = EnglishStemmer()
 
 stop_words = ["a","able","about","across","after","all","almost","also","am","among","an","and","any","are","as","at","be","because","been","but","by","can","cannot","could","dear","did","do","does","either","else","ever","every","for","from","get","got","had","has","have","he","her","hers","him","his","how","however","i","if","in","into","is","it","its","just","least","let","like","likely","may","me","might","most","must","my","neither","no","nor","not","of","off","often","on","only","or","other","our","own","rather","said","say","says","she","should","since","so","some","than","that","the","their","them","then","there","these","they","this","tis","to","too","twas","us","wants","was","we","were","what","when","where","which","while","who","whom","why","will","with","would","yet","you","your"]
 def get_stop_words_regex(): 
@@ -106,8 +107,7 @@ class AbstractsLexer(RegexLexer):
       }
 def stem_token(t): 
   if t[0] is Word:
-    print (stemming(t[1]))
-    return (t[0], stemming(t[1]))
+    return (t[0], stemmer.stem(t[1]))
   else:
     return t
 
