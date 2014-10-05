@@ -8,7 +8,7 @@ from pygments.lexer import RegexLexer, include, bygroups, using
 from pygments.token import Punctuation, Text, Comment, Keyword, Name, String, \
          Generic, Operator, Number, Whitespace, Literal, Token
 import StringIO
-from stemming.porter2 import stem
+from stemming.porter2 import stem as stemming
 
 Stopword = Token.Stopword
 Equation = Token.Equation
@@ -106,7 +106,8 @@ class AbstractsLexer(RegexLexer):
       }
 def stem_token(t): 
   if t[0] is Word:
-    return (t[0], stem(t[1]))
+    print (stemming(t[1]))
+    return (t[0], stemming(t[1]))
   else:
     return t
 

@@ -22,19 +22,21 @@ rejects = [fs.lt_three_chars]
 tfms = [ts.to_lower]
 
 # Number of most occurring words to take for feature counts, -1 for all of them just realize there are between 30,000 and 40,000 words and your machine might hang
-n = 1000 
+n = -1  
 
 # Toggle this boolean if you want to save to csvs 
 save2csv = True 
 
 # This toggles stemming 
-stemming = False
+stemming = True 
 
 # Dictionary output file name and path
-categories_csv = "../../Datasets/processed/categories.csv"
-dict_csv = "../../Datasets/processed/word_count_dictionary.csv"
-sample_counts_csv = "../../Datasets/processed/sample_counts.csv"
-sample_booleans_csv = "../../Datasets/processed/sample_booleans.csv"
+categories_csv = "../../Datasets/processed/categories_stemmed.csv"
+dict_csv = "../../Datasets/processed/word_count_dictionary_stemmed.csv"
+fw_csv = "../../Datasets/processed/filtered_words_stemmed.csv"
+aw_csv = "../../Datasets/processed/all_words_stemmed.csv"
+sample_counts_csv = "../../Datasets/processed/sample_counts_stemmed.csv"
+sample_booleans_csv = "../../Datasets/processed/sample_booleans_stemmed.csv"
 
 # files for stemming output
 # categories_csv = "../../Datasets/processed/categories_stemmed.csv"
@@ -61,15 +63,26 @@ pp = prp.PreProcessor(merged, accepts, rejects, tfms, n, stem=stemming)
 if save2csv: 
   categories = pp.get_categories() 
   worddict = pp.word_dict()
-  sample_counts = pp.sample_counts() 
-  sample_booleans = pp.sample_booleans()
+  ft_words = pp.ft_data
+  allwords = pp.top_words
+  # sample_counts = pp.sample_counts() 
+  # sample_booleans = pp.sample_booleans()
 
   cw = csv.writer(open(categories_csv, "w+"))
   ww = csv.writer(open(dict_csv, "w+"))
-  scw = csv.writer(open(sample_counts_csv, "w+"))
-  sbw = csv.writer(open(sample_booleans_csv, "w+")) 
+  fw = csv.writer(open(fw_csv, "w+"))
+  aw = csv.writer(open(aw_csv, "w+"))
+  # scw = csv.writer(open(sample_counts_csv, "w+"))
+  # sbw = csv.writer(open(sample_booleans_csv, "w+")) 
 
   cw.writerows(categories.items())
   ww.writerows(worddict.items())
-  scw.writerows(sample_counts) 
-  sbw.writerows(sample_booleans)
+
+  for item in ft_words:
+    tup = [item[1]] + item[0]
+    fw.writerow(tup)
+
+  for w in allwords: 
+    aw.writerow([w])
+  # scw.writerows(sample_counts) 
+  # sbw.writerows(sample_booleans)

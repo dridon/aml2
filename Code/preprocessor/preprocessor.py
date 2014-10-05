@@ -14,7 +14,7 @@ class PreProcessor():
   ft_data = None
   top_words = None
   
-  def __init__(self, unprocessed_data, accept_filters = None, reject_filters = None, transforms = None, top_word_count = 100, stem=False): 
+  def __init__(self, unprocessed_data, accept_filters = None, reject_filters = None, transforms = None, top_word_count = 100, stem=False, labelled = True): 
     if accept_filters is not None: 
       self.accept_filters = accept_filters 
 
@@ -27,6 +27,7 @@ class PreProcessor():
     self.unprocessed_data = list(unprocessed_data)
     self.tokenized_data = lx.tokenize_list(unprocessed_data, 0, verbose=True, stem=stem)
     self.top_word_count = top_word_count
+    self.labelled = labelled
 
     """
       This value is hard coded to keep things consistent during runs, it should 
@@ -105,13 +106,22 @@ class PreProcessor():
     i = 1 
     for row in td: 
       l = []
-      for token in row[0]:
-          w = self.filter_and_transform_token(token)
-          if w is not None:
-            l.append(w)
-      ft.append([l, row[1]])
-      if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
-      i = i + 1
+      if self.labelled:
+        for token in row[0]:
+            w = self.filter_and_transform_token(token)
+            if w is not None:
+              l.append(w)
+        ft.append([l, row[1]])
+        if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
+        i = i + 1
+      else:
+        for token in row:
+            w = self.filter_and_transform_token(token)
+            if w is not None:
+              l.append(w)
+        ft.append(l)
+        if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
+        i = i + 1
     return ft
 
   def filter_and_transform(self, accept_filters, reject_filters, transforms): 
@@ -138,25 +148,26 @@ class PreProcessor():
     print "filtering data..."
     self.ft_data = self.filter_and_transform_list()
 
-    print "generating word counts..."
-    # # helper that eases processing of data
-    self.counter = wc.WordCounter(self.ft_data)
+    if self.labelled: 
+      print "generating word counts..."
+      # # helper that eases processing of data
+      self.counter = wc.WordCounter(self.ft_data)
 
-    print "creating word dictionary..."
-    # # get the word count dictionary 
-    self.dictionary = self.word_dict()
+      print "creating word dictionary..."
+      # # get the word count dictionary 
+      self.dictionary = self.word_dict()
 
-    print "getting most occurring words..."
-    # # get the most commonly occurring words
-    self.top_words = self.most_occurring_words()
+      print "getting most occurring words..."
+      # # get the most commonly occurring words
+      self.top_words = self.most_occurring_words()
 
-    print "getingt sample counts..." 
-    # # get a list of the counts of the samples
-    self.processed = self.sample_counts(force=True)
+    # print "getingt sample counts..." 
+    # # # get a list of the counts of the samples
+    # self.processed = self.sample_counts(force=True)
 
-    print "getting sample booleans..." 
-    # # booleans of processed values
-    self.processed_booleans = self.sample_booleans(force=True)
+    # print "getting sample booleans..." 
+    # # # booleans of processed values
+    # self.processed_booleans = self.sample_booleans(force=True)
 
   def word_dict(self):
     """
@@ -179,47 +190,47 @@ class PreProcessor():
 
     return self.counter.most_occurring(self.top_word_count)
 
-  def sample_counts(self, force = False): 
-    """
-      Returns the word counts of the top most occurring words over all samples
-    """
-    def reset_dict_counts(d): 
-      for k in d.iterkeys(): 
-        d[k] = 0 
+  # def sample_counts(self, force = False): 
+  #   """
+  #     Returns the word counts of the top most occurring words over all samples
+  #   """
+  #   def reset_dict_counts(d): 
+  #     for k in d.iterkeys(): 
+  #       d[k] = 0 
 
-    if self.ft_data is None or self.top_words is None: return None
-    if not force: return self.processed
+  #   if self.ft_data is None or self.top_words is None: return None
+  #   if not force: return self.processed
 
-    samples = [] 
-    samples.append(self.top_words + ["category"])
-    i = 1
+  #   samples = [] 
+  #   samples.append(self.top_words + ["category"])
+  #   i = 1
     
-    collector = OrderedDict() 
-    for w in self.top_words: 
-      collector[w] = 0 
+  #   collector = OrderedDict() 
+  #   for w in self.top_words: 
+  #     collector[w] = 0 
 
-    for row in self.ft_data: 
-      sample = row[0]
-      self.counter.str_word_counts(sample, collector)
-      samples.append(collector.values() + [self.get_category(row[1])])
-      reset_dict_counts(collector)
-      if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
-      i = i + 1 
-    return samples
+  #   for row in self.ft_data: 
+  #     sample = row[0]
+  #     self.counter.str_word_counts(sample, collector)
+  #     samples.append(collector.values() + [self.get_category(row[1])])
+  #     reset_dict_counts(collector)
+  #     if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
+  #     i = i + 1 
+  #   return samples
 
-  def sample_booleans(self, force=False): 
-    """
-      Returns a version of the sample counts in boolean format if the count 
-      of a word is greater than 0
-    """
-    if self.processed is None: return None
-    if not force: return self.processed_booleans
+  # def sample_booleans(self, force=False): 
+  #   """
+  #     Returns a version of the sample counts in boolean format if the count 
+  #     of a word is greater than 0
+  #   """
+  #   if self.processed is None: return None
+  #   if not force: return self.processed_booleans
 
-    samples = iter(self.processed) 
-    bool_samples = [next(samples)]
-    i = 1
-    for row in samples:
-      bool_samples.append([ c > 0 for c in row[:-1]] + [row[-1]])
-      if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
-      i = i + 1 
-    return bool_samples
+  #   samples = iter(self.processed) 
+  #   bool_samples = [next(samples)]
+  #   i = 1
+  #   for row in samples:
+  #     bool_samples.append([ c > 0 for c in row[:-1]] + [row[-1]])
+  #     if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
+  #     i = i + 1 
+  #   return bool_samples
