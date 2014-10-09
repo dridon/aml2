@@ -79,16 +79,16 @@ if __name__ == "__main__":
     #print training_set
     #print validation_set    
          
-    print " "            
+    # print " "            
     
-    print "Training the Multinomial NB classifier..."   
-    nbm = NaiveBayesMultinomial() 
-    nbm.train(training_set)       
-    print "Testing the Multinomial NB classifier..."  
-    errors, predictions, accuracy = nbm.test(validation_set)
-    print "NB accuracy: ", accuracy 
-    print "NB confusion matrix:" 
-    get_confusion_matrix(validation_set[:,-1], predictions)
+    # print "Training the Multinomial NB classifier..."   
+    # nbm = NaiveBayesMultinomial() 
+    # nbm.train(training_set)       
+    # print "Testing the Multinomial NB classifier..."  
+    # errors, predictions, accuracy = nbm.test(validation_set)
+    # print "NB accuracy: ", accuracy 
+    # print "NB confusion matrix:" 
+    # get_confusion_matrix(validation_set[:,-1], predictions)
      
     print " "
      

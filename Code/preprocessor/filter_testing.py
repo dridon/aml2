@@ -35,12 +35,15 @@ fsuffix = ""
 # Input data, no need to have output file name if test data
 input_file_name = "../../Datasets/test_input.csv"
 
+# Output file 
+fw_csv = "../../Datasets/processed/filtered_words"
+
 """
 Code, you shouldn't really need to touch this unless there's something very
 specific required
 """
 inputs = merge.read_csv(input_file_name) 
-merged = [r[1] for r in inputs] 
+merged = [[r[1]] for r in inputs] 
 
 # create the preprocessor
 pp = prp.PreProcessor(merged, accepts, rejects, tfms, n, stem=stemming, labelled=False)
@@ -52,16 +55,9 @@ if save2csv:
   ssuff = "" 
   ssuff = ssuff + "_stemmed" if stemming else ssuff
   ssuff = ssuff + fsuffix
-  ssuff = ssuff = "_test"
-  ssuff = ssuff = ".csv"
-  fw = csv.writer(open(fw_csv + ssuff if stemming else fw_csv, "w+"))
-
+  ssuff = ssuff + "_test"
+  ssuff = ssuff + ".csv"
+  fw = csv.writer(open(fw_csv + ssuff, "w+"))
   for i in range(len(ft_words)):
-    r = ft_words[i] + [labels[i]]
+    r = ft_words[i]
     fw.writerow(r)
-
-  cw.writerows(categories.items())
-  ww.writerows(worddict.items())
-
-  for w in allwords: 
-    aw.writerow([w])

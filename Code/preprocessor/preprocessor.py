@@ -42,7 +42,7 @@ class PreProcessor():
       for k,v in categories.items(): 
         self.categories[k] = v
 
-    self.labels = [k for k in ls]
+    if labelled: self.labels = [k for k in ls]
     self.process_data()
 
   def get_categories(self): 
