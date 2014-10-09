@@ -7,8 +7,7 @@ from classifiers import *
 from knn import * #added by sherry
 from sklearn.cross_validation import StratifiedKFold
 import matplotlib.pyplot as plt
-
-
+import feature_generation as ftg
 
 def load_dataset(file_name, var_type):
     """
@@ -48,7 +47,7 @@ def get_confusion_matrix(Y1, Y2):
     plt.xlabel('Predicted label')
     plt.show()
     
-def get_k_fold_partition(dataset, k = 5):
+def get_k_fold_partition(samples, labels, k = 5):
     """
     Divides a dataset into a training set
     and a validation set. 
@@ -59,8 +58,6 @@ def get_k_fold_partition(dataset, k = 5):
     if k < 2:  # k must be at least 2
         k = 2
         
-    samples = dataset[:,:-1]    
-    labels = dataset[:,-1]  
     folds = StratifiedKFold(labels, k) # Generate the fold indexes.
     
     # Build the 2 sets:
@@ -74,11 +71,12 @@ def get_k_fold_partition(dataset, k = 5):
     return train_set, test_set
     
 if __name__ == "__main__":    
-   
-    dataset = load_dataset("Training.csv", int)       
+
+    samples, labels = ftg.get_features(stemming=False, test=False, inbool=False)
     
     # Testing    
-    training_set, validation_set = get_k_fold_partition(dataset, 5)
+    training_set, validation_set = get_k_fold_partition(samples, labels, 5)
+
     #print training_set
     #print validation_set    
          
@@ -93,17 +91,16 @@ if __name__ == "__main__":
     # print "NB confusion matrix:" 
     # get_confusion_matrix(validation_set[:,-1], predictions)
      
-    print " "
+    # print " "
      
-    print "Training the RF classifier..."     
-    f = RandomForest()
-    f.train(training_set)
-    print "Testing the RF classifier..." 
-    predictions, accuracy = f.test(validation_set)
-    print "RF accuracy: ", accuracy 
-    print "RF confusion matrix:"
-    get_confusion_matrix(validation_set[:,-1], predictions)
-
+    # print "Training the RF classifier..."     
+    # f = RandomForest()
+    # f.train(training_set)
+    # print "Testing the RF classifier..." 
+    # predictions, accuracy = f.test(validation_set)
+    # print "RF accuracy: ", accuracy 
+    # print "RF confusion matrix:"
+    # get_confusion_matrix(validation_set[:,-1], predictions)
 
 
     ####################### added by sherry #######################
