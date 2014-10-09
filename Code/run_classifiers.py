@@ -4,8 +4,11 @@ from numpy import genfromtxt, newaxis
 import numpy as np
 from sklearn.metrics import confusion_matrix
 from classifiers import *
+from knn import * #added by sherry
 from sklearn.cross_validation import StratifiedKFold
 import matplotlib.pyplot as plt
+
+
 
 def load_dataset(file_name, var_type):
     """
@@ -99,6 +102,21 @@ if __name__ == "__main__":
     predictions, accuracy = f.test(validation_set)
     print "RF accuracy: ", accuracy 
     print "RF confusion matrix:"
+    get_confusion_matrix(validation_set[:,-1], predictions)
+
+
+
+    ####################### added by sherry #######################
+
+    print " "            
+    
+    #print "Training the KNN classifier..."   
+    knn = KNearestNeighbor() 
+    #nbm.train(training_set)       
+    print "Testing the Multinomial NB classifier..."  
+    predictions, accuracy = knn.test(training_set,validation_set)
+    print "KNN accuracy: ", accuracy 
+    print "KNN confusion matrix:" 
     get_confusion_matrix(validation_set[:,-1], predictions)
     
     
