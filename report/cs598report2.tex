@@ -1,0 +1,237 @@
+% THIS IS SIGPROC-SP.TEX - VERSION 3.1
+% WORKS WITH V3.2SP OF ACM_PROC_ARTICLE-SP.CLS
+% APRIL 2009
+%
+% It is an example file showing how to use the 'acm_proc_article-sp.cls' V3.2SP
+% LaTeX2e document class file for Conference Proceedings submissions.
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V3.2SP) *DOES NOT* produce:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) Page numbering
+% ---------------------------------------------------------------------------------------------------------------
+% It is an example which *does* use the .bib file (from which the .bbl file
+% is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission,
+% you need to 'insert'  your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% Questions regarding SIGS should be sent to
+% Adrienne Griscti ---> griscti@acm.org
+%
+% Questions/suggestions regarding the guidelines, .tex and .cls files, etc. to
+% Gerald Murray ---> murray@hq.acm.org
+%
+% For tracking purposes - this is V3.1SP - APRIL 2009
+
+\documentclass{acm_proc_article-sp}
+
+\makeatletter
+\def\@copyrightspace{\relax}
+\makeatother
+
+\begin{document}
+
+\title{Abstract Classification
+% \titlenote{(Does NOT produce the permission block, copyright information nor page numbering). For use with ACM\_PROC\_ARTICLE-SP.CLS. Supported by ACM.}
+}
+\subtitle{[COMP 598 Group Project 2]
+\titlenote{The complete dataset of this report is available at
+\texttt{http://www.acm.org/eaddress.htm}
+\\\\
+The implementation of the algorithm described in this report is avaiable at
+\texttt{http://www.acm.org/eaddress.htm}}}
+%
+% You need the command \numberofauthors to handle the 'placement
+% and alignment' of the authors beneath the title.
+%
+% For aesthetic reasons, we recommend 'three authors at a time'
+% i.e. three 'name/affiliation blocks' be placed beneath the title.
+%
+% NOTE: You are NOT restricted in how many 'rows' of
+% "name/affiliations" may appear. We just ask that you restrict
+% the number of 'columns' to three.
+%
+% Because of the available 'opening page real-estate'
+% we ask you to refrain from putting more than six authors
+% (two rows with three columns) beneath the article title.
+% More than six makes the first-page appear very cluttered indeed.
+%
+% Use the \alignauthor commands to handle the names
+% and affiliations for an 'aesthetic maximum' of six authors.
+% Add names, affiliations, addresses for
+% the seventh etc. author(s) as the argument for the
+% \additionalauthors command.
+% These 'additional authors' will be output/set for you
+% without further effort on your part as the last section in
+% the body of your article BEFORE References or any Appendices.
+
+\numberofauthors{3} %  in this sample file, there are a *total*
+% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+% reasons) and the remaining two appear in the \additionalauthors section.
+%
+\author{
+% You can go ahead and credit any number of authors here,
+% e.g. one 'row of three' or two rows (consisting of one row of three
+% and a second row of one, two or three).
+%
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+% e-mail address with \email.
+%
+% 1st. author
+\alignauthor
+Benedicte Leonard-Cannon\\
+  \affaddr{McGill University}\\
+       %\affaddr{1932 Wallamaloo Lane}\\
+      % \affaddr{Wallamaloo, New Zealand}\\
+       \affaddr{benedicte.leonard-cannon@mail.mcgill.ca}       
+% 2nd. author
+\alignauthor
+Faiz Khan \\
+ \affaddr{McGill University}\\
+      % \affaddr{P.O. Box 1212}\\
+      % \affaddr{Dublin, Ohio 43017-6221}\\
+       \affaddr{faiz.khan@mail.mcgill.ca}
+% 3rd. author
+\alignauthor Sherry  Ruan\\
+       \affaddr{McGill University}\\
+      % \affaddr{1 Th{\o}rv{\"a}ld Circle}\\
+     %  \affaddr{Hekla, Iceland}\\
+      \affaddr{shanshan.ruan@mail.mcgill.ca}
+%\and  % use '\and' if you need 'another row' of author names
+%% 4th. author
+%\alignauthor Lawrence P. Leipuner\\
+%       \affaddr{Brookhaven Laboratories}\\
+%       \affaddr{Brookhaven National Lab}\\
+%       \affaddr{P.O. Box 5000}\\
+%       \email{lleipuner@researchlabs.org}
+%% 5th. author
+%\alignauthor Sean Fogarty\\
+%       \affaddr{NASA Ames Research Center}\\
+%       \affaddr{Moffett Field}\\
+%       \affaddr{California 94035}\\
+%       \email{fogartys@amesres.org}
+%% 6th. author
+%\alignauthor Charles Palmer\\
+%       \affaddr{Palmer Research Laboratories}\\
+%       \affaddr{8600 Datapoint Drive}\\
+%       \affaddr{San Antonio, Texas 78229}\\
+%       \email{cpalmer@prl.com}
+}
+% There's nothing stopping you putting the seventh, eighth, etc.
+% author on the opening page (as the 'third row') but we ask,
+% for aesthetic reasons that you place these 'additional authors'
+% in the \additional authors block, viz.
+%\additionalauthors{Additional authors: John Smith (The Th{\o}rv{\"a}ld Group,
+%email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
+%(The Kumquat Consortium, email: {\texttt{jpkumquat@consortium.net}}).}
+\date{30 July 1999}
+% Just remember to make sure that the TOTAL number of authors
+% is the number that will appear on the first page PLUS the
+% number that will appear in the \additionalauthors section.
+
+\maketitle
+\begin{abstract}
+TBD
+\end{abstract}
+
+%% A category with the (minimum) three required fields
+%\category{H.4}{Information Systems Applications}{Miscellaneous}
+%%A category including the fourth, optional field follows...
+%\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+%
+%\terms{Theory}
+%
+%\keywords{ACM proceedings, \LaTeX, text tagging} % NOT required for Proceedings
+
+\section{Introduction}
+What is text classification (or categorization)
+
+Briefly describe our methodology
+
+Talk about potential uses?
+
+
+
+
+
+\section{Related Work}
+In the following section, we present existing work conducted by other researchers in the task of text categorization.
+
+Genkin and Lewis[X] proposed a Bayesian lasso logistic regression model for binary text categorization that relied on a Laplace prior to reduce the risk of overfitting. Their approach addressed the impracticality of fitting a standard logistic regression model to a dataset containing a large feature space. More precisely, their training algorithm used prior probability distributions of the model parameters to encourage model sparsity. According to them, this approach produced a compact model that is effective and doesn’t overfit. In practice, their algorithm performed as well as two state-of-the-art categorization models (support vector machines (SVM) and ridge logistic regression) on five standard test sets (ModApte, RCV1-v2, OHSUMED, WebKB and 20 NG).  [Regression: \texttt{http://www.stat.columbia.edu/~madigan/PAPERS/techno.pdf}]
+
+Joachims (X) was the first to study the performance of SVMs for text classification in his 1998 paper. Joachims used two SVMs -one based on a polynomial kernel and the other on a radial basis function (RBF) kernel-. He compared both of these models with the following benchmark algorithms: Naive Bayes, Rocchio, k nearest neighbors (k-NN) and C4.5 decision tree. Here again, the performance of these classifiers were assessed through the ModApte and Ohsumed datasets. Prior to fitting, these datasets were reduced to a bag-of-words representation out of which stop-words were discarded. The resulting feature vectors were normalized to unit length and the best features were selected according to their information gain. From the experiments conducted, Joachim concluded that both SVM algorithms outperformed the four benchmark algorithms significantly. \texttt{http://www.cs.cornell.edu/people/tj/publications/joachims 98a.pdf}
+
+Some sources I might use:
+%General: http://nmis.isti.cnr.it/sebastiani/Publications/TM05.pdf
+%N-gram: http://odur.let.rug.nl/vannoord/TextCat/textcat.pdf
+%Bigrams: http://www.cs.ucsb.edu/~yfwang/papers/igm.pdf 
+%Classifier comparison: http://www.inf.ufes.br/~claudine/courses/ct08/artigos/yang_sigir99.pdf
+%Preprocessing: http://www.di.uevora.pt/~pq/papers/enia-goncalves-quaresma.pdf
+
+
+\section{Methodology}
+Data preprocessing
+*Write which libraries were used for each case if applicable*
+Lower case
+Remove punctuation
+Remove stop words
+Stemming
+What else?	
+Feature selection
+Build a dictionary of all words present in abstracts
+Get rid of words occurring less than X times to reduce dimensionality of dataset
+Build 2 dataset based on the dictionary. 1 dataset contains word occurrence/absence for each abstract. Other dataset is bag-of-words.
+Remove features with low variance (scikit learn)
+Univariate feature selection (scikit learn) ?? if we can
+
+Joachims says “aggressive feature selection may result in a loss of information” even if we only discard the least relevant features. Hence, it is best if we keep as many features as we can handle.
+
+Algorithm selection
+Multinomial, multivariate Naive Bayes (Bennie write)
+Nearest Neighbor (Sherry write)
+Random forest (Bennie write)
+Try SVMs According to Joachims: “their ability to learn can be independent of the dimensionality of the feature space”
+Optimization (if required)
+?
+Parameter selection
+Laplace smoothing alpha for Bayes.
+k for NN. Other params
+Random forests have 10 params…
+
+
+\section{Testing and validation}
+detailed analysis of results, NOT Kaggle
+
+\section{Discussion}
+Improvements
+-Combine bag-of-words with bigrams or trigrams
+-Normalize the feature vectors by abstract length (here not a big difference since all abstracts are roughly the same length)
+-Consider formulae (might be easy to map a given formula to a particular field!)
+
+
+We hereby state that all the work presented in this report is that of the authors.
+
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+% ACM needs 'a single self-contained file'!
+%
+%APPENDICES are optional
+%\balancecolumns
+
+\end{document}
