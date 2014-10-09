@@ -48,7 +48,8 @@ class EnglishLexer(RegexLexer):
   
   tokens = {
       'root': [
-        (r'[,\.;\:\'\"\?\-\(\)\[\]\/`\*\+\|=><#\~@\\]', Punctuation),
+        # (r'[,\.;\:\'\"\?\-\(\)\[\]\/`\*\+\|=><#\~@\\]', Punctuation),
+        (r'[,\.;\:\'\"\?\(\)\[\]\/`\*\+\|=><#\~@\\]', Punctuation), #without hyphen
         (r'\\', SpecialCharacter),
         (r'\s', Whitespace),
         # (r'\sthe\s|the\s|\sthe|\sof\s|of\s|\sof|\sin\s|in\s|\sin|\sand\s|and\s|\sand|\sto\s|to\s|\sto|\swe\s|we\s|\swe|\sis\s|is\s|\sis|\sfor\s|for\s|\sfor|\sthat\s|that\s|\sthat|\sthis\s|this\s|\sthis|\sare\s|are\s|\sare|\swith\s|with\s|\swith|\son\s|on\s|\son|\sby\s|by\s|\sby|\sas\s|as\s|\sas|\san\s|an\s|\san|\swhich\s|which\s|\swhich|\sbe\s|be\s|\sbe|\sour\s|our\s|\sour|\sit\s|it\s|\sit|\scan\s|can\s|\scan|\sfrom\s|from\s|\sfrom|\shas\s|has\s|\shas|\shave\s|have\s|\shave', Stopword),
@@ -65,7 +66,6 @@ class AbstractsLexer(RegexLexer):
   """
 
   name = "Abstract"
-  
   tokens = {
       'general': [
         (r'%.*?\n', Comment),
@@ -140,23 +140,19 @@ def get_tokens(s, stem = False):
       l.append(token)
   return l
 
-
-def tokenize_list(l, col, verbose=True, stem=False):
+def tokenize_list(data, verbose=True, stem=False, labelled = False):
   """
     Takes a 2D list and a col to tokenize in the list and returns a new list 
     that is a mirror of the argument list except the col column is replaced 
     with tokenized versions of the strings in the argument list. 
   """
   t = [] 
+  l = []
   i = 1 
-  only_two = len(l[1])  ==  2
   print "lexing(generating tokens)..." 
-  for row in l: 
-    if i % 1000 == 0 and verbose: print "\tcompleted " + str(i) + " samples"
-
-    if only_two:
-      t.append([get_tokens(row[col], stem), row[0] if col > 0 else row[1]])
-    else:
-      t.append([get_tokens(row[col], stem), row[:col] + row[col +1:]])
+  for row in data: 
+    t.append(get_tokens(row[0], stem))
+    if labelled: l.append(row[1])
+    if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
     i = i + 1 
-  return t
+  return (t,l)

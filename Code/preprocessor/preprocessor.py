@@ -14,7 +14,7 @@ class PreProcessor():
   ft_data = None
   top_words = None
   
-  def __init__(self, unprocessed_data, accept_filters = None, reject_filters = None, transforms = None, top_word_count = 100, stem=False, labelled = True): 
+  def __init__(self, unprocessed_data, accept_filters = None, reject_filters = None, transforms = None, top_word_count = 100, stem=False, labelled = True, categories = None): 
     if accept_filters is not None: 
       self.accept_filters = accept_filters 
 
@@ -25,7 +25,7 @@ class PreProcessor():
       self.transforms = transforms
 
     self.unprocessed_data = list(unprocessed_data)
-    self.tokenized_data = lx.tokenize_list(unprocessed_data, 0, verbose=True, stem=stem)
+    self.tokenized_data, ls = lx.tokenize_list(unprocessed_data, verbose=True, stem=stem, labelled = labelled)
     self.top_word_count = top_word_count
     self.labelled = labelled
 
@@ -33,28 +33,17 @@ class PreProcessor():
       This value is hard coded to keep things consistent during runs, it should 
       be removed in the final version
     """
-    self.get_category('cs')
-    self.get_category('stat')
-    self.get_category('physics')
-    self.get_category('math')
+    if categories is None: 
+      self.categories['cs'] = 0
+      self.categories['stat'] = 1
+      self.categories['physics'] = 2 
+      self.categories['math'] = 3 
+    else: 
+      for k,v in categories.items(): 
+        self.categories[k] = v
 
+    self.labels = [k for k in ls]
     self.process_data()
-
-  def next_category_key(self): 
-    """
-      Generates the next number to be used as a category index 
-    """
-    index = self.category_count
-    self.category_count = self.category_count + 1 
-    return index 
-
-  def get_category(self, k): 
-    """
-      Gets the numberical category for a category k
-    """
-    if k not in self.categories: 
-      self.categories[k] = self.next_category_key()
-    return self.categories[k]
 
   def get_categories(self): 
     """
@@ -106,44 +95,21 @@ class PreProcessor():
     i = 1 
     for row in td: 
       l = []
-      if self.labelled:
-        for token in row[0]:
-            w = self.filter_and_transform_token(token)
-            if w is not None:
-              l.append(w)
-        ft.append([l, row[1]])
-        if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
-        i = i + 1
-      else:
-        for token in row:
-            w = self.filter_and_transform_token(token)
-            if w is not None:
-              l.append(w)
-        ft.append(l)
-        if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
-        i = i + 1
+      for token in row:
+          w = self.filter_and_transform_token(token)
+          if w is not None:
+            l.append(w)
+      ft.append(l)
+      if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
+      i = i + 1
     return ft
-
-  def filter_and_transform(self, accept_filters, reject_filters, transforms): 
-    """
-      Sets the filters and transforms for the PreProcessor instance and 
-      reprocessess the initial data with regards to these filters and 
-      transforms
-    """
-    self.accept_filters = accept_filters 
-    self.reject_filters = reject_filters
-    self.transforms = transforms 
-    self.process_data(force=True)
 
   def process_data(self, force = False): 
     """
       Processes input data according to filters and transforms that are available
     """
-
     if self.processed is not None and not force: return self.processed
-
     print "processing data..."
-
     # first filter and transform the the abstracts to words we want
     print "filtering data..."
     self.ft_data = self.filter_and_transform_list()
@@ -161,14 +127,6 @@ class PreProcessor():
       # # get the most commonly occurring words
       self.top_words = self.most_occurring_words()
 
-    # print "getingt sample counts..." 
-    # # # get a list of the counts of the samples
-    # self.processed = self.sample_counts(force=True)
-
-    # print "getting sample booleans..." 
-    # # # booleans of processed values
-    # self.processed_booleans = self.sample_booleans(force=True)
-
   def word_dict(self):
     """
       Returns the dictionary of word counts if data has been filtered and 
@@ -183,54 +141,7 @@ class PreProcessor():
       transformed otherwise None
     """
     n = n if n is not None else self.top_word_count
-
     if self.counter is None: return None
-
     n = n if self.top_word_count != -1 else self.counter.max_words()
 
     return self.counter.most_occurring(self.top_word_count)
-
-  # def sample_counts(self, force = False): 
-  #   """
-  #     Returns the word counts of the top most occurring words over all samples
-  #   """
-  #   def reset_dict_counts(d): 
-  #     for k in d.iterkeys(): 
-  #       d[k] = 0 
-
-  #   if self.ft_data is None or self.top_words is None: return None
-  #   if not force: return self.processed
-
-  #   samples = [] 
-  #   samples.append(self.top_words + ["category"])
-  #   i = 1
-    
-  #   collector = OrderedDict() 
-  #   for w in self.top_words: 
-  #     collector[w] = 0 
-
-  #   for row in self.ft_data: 
-  #     sample = row[0]
-  #     self.counter.str_word_counts(sample, collector)
-  #     samples.append(collector.values() + [self.get_category(row[1])])
-  #     reset_dict_counts(collector)
-  #     if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
-  #     i = i + 1 
-  #   return samples
-
-  # def sample_booleans(self, force=False): 
-  #   """
-  #     Returns a version of the sample counts in boolean format if the count 
-  #     of a word is greater than 0
-  #   """
-  #   if self.processed is None: return None
-  #   if not force: return self.processed_booleans
-
-  #   samples = iter(self.processed) 
-  #   bool_samples = [next(samples)]
-  #   i = 1
-  #   for row in samples:
-  #     bool_samples.append([ c > 0 for c in row[:-1]] + [row[-1]])
-  #     if i % 1000 == 0: print "\tcompleted " + str(i) + " samples" 
-  #     i = i + 1 
-  #   return bool_samples

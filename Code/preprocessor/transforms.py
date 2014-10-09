@@ -9,3 +9,6 @@ def to_lower(v):
 
 def stem(v): 
   return stem(str(v))
+
+def no_back_slash(v): 
+  return v.replace("\\", "")

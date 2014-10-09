@@ -35,7 +35,7 @@ class WordCounter:
       for row in self.data:
         if i % 1000 == 0: print "\tcompleted " + str(i) + " samples"
         i = i + 1 
-        for word in row[0]: 
+        for word in row: 
           self.load_word(word, self.word_counts)
 
     return dict(self.word_counts)
