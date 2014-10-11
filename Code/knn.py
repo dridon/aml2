@@ -62,7 +62,7 @@ class KNearestNeighbor:
 
             # Check if the predicted label matches the actual label.
             if(labels_to_return[index_i] != testset[index_i][-1]):
-                prediction_errors[i] = 1     
+                prediction_errors[index_i] = 1     
                 
         # Compute accuracy
         accuracy = 1.0 - (np.sum(prediction_errors) * 1.0 / len(prediction_errors))    
