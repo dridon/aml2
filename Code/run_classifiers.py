@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
     print " "            
     
-    #print "Training the KNN classifier..."   
+    # print "Training the KNN classifier..."   
     knn = KNearestNeighbor(2) 
     #nbm.train(training_set)       
     print "Testing the KNN classifier..."  

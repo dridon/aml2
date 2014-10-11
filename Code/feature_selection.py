@@ -14,6 +14,7 @@ def get_data(stemming = False, fsuffix=""):
   ssuff = "" 
   ssuff = ssuff + "_stemmed" if stemming else ssuff
   ssuff = ssuff + fsuffix
+  ssuff = ssuff + "_train"
   ssuff = ssuff + ".csv"
 
   fdr = csv.reader(open(fdf + ssuff, "r"))
@@ -33,7 +34,7 @@ def get_data(stemming = False, fsuffix=""):
 
   for item in fdr: 
     filtered_words.append((item[:-1], item[-1]))
-  scounter = sc.SampleCounter(words, categories, booleans=inbool)
+  scounter = sc.SampleCounter(words, categories, booleans=False)
 
   i = 0
   for r in filtered_words: 
@@ -42,7 +43,7 @@ def get_data(stemming = False, fsuffix=""):
     i = i  + 1 
   return (scounter.process_list, scounter.labels, words)
 
-features, labels, words  = get_data(stemming = True, fsuffix="")
+features, labels, words  = get_data(stemming = False, fsuffix="")
 
 kbest = SelectKBest(chi2, k = 2000).fit(features, labels)
 indices = kbest.get_support(indices = True)
@@ -51,5 +52,5 @@ words_new = []
 for i in indices: 
   words_new.append([words[i]])
 
-writ = csv.writer(open("../Datasets/processed/2k_best_words_stemmed", "w+"))
+writ = csv.writer(open("../Datasets/processed/2k_best_words_train.csv", "w+"))
 writ.writerows(words_new)
