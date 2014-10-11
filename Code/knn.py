@@ -1,4 +1,5 @@
 import numpy as np
+from metric import *
 
 # Notes:
 # 1. should we separate dataset (word counts) from labels?
@@ -43,7 +44,7 @@ class KNearestNeighbor:
                 input_j = example_j[:-1]
                 # calculate distances based on a given metric
                 # add the distance between input_i and input_j, as well as the index j into the list
-                distances_i.append(metric_abs(input_i,input_j), index_j)
+                distances_i.append((metric_abs(input_i,input_j), index_j))
 
             # get k nearest neighbors for input i
             k_neighbors_for_i = sorted(distances_i)[:self.k]
@@ -97,7 +98,7 @@ class KNearestNeighbor:
                 input_j = example_j[:-1]
                 # calculate distances based on a given metric
                 # add the distance between input_i and input_j, as well as the index j into the list
-                distances_i.append(metric_abs(input_i,input_j), index_j)
+                distances_i.append((metric_abs(input_i,input_j), index_j))
 
             # get k nearest neighbors for input i
             k_neighbors_for_i = sorted(distances_i)[:self.k]
@@ -118,25 +119,7 @@ class KNearestNeighbor:
 
 
 
-    ################################# Auxliary Metric functions #################################
-
-    # This metric returns the sum of absolute value of difference between each element in the array
-    def metric_abs(i, j):
-        """
-        Given two array i and j representing test input and train input respectively
-        (where i and j has same number of elements)
-        return the distance between them
-        """
-        # initialize the distance between i and j
-        distance = 0
-        # Loop over each number    
-        for ii in i: 
-            # Loop over each number except the last one  
-            for jj in j:   
-                # calculate distance based on a given metric
-                distance = distance + abs(ii-jj)
-        # return the distance between i and j        
-        return distance
+   
 
 
  
