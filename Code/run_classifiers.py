@@ -73,10 +73,9 @@ def get_k_fold_partition(samples, labels, k = 5):
 if __name__ == "__main__":    
 
 
-    samples, labels = ftg.get_features(stemming=False, test=False, inbool=False, limit = 1000)
+    samples, labels = ftg.get_features(stemming=False, test=False, inbool=False, limit = 5000)
 
-    samples = samples[:10000]
-    labels = labels[:10000]
+   
 
     
     # Testing    
