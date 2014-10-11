@@ -112,8 +112,10 @@ if __name__ == "__main__":
 
     print " "            
     
+
     #print "Training the KNN classifier..."   
     knn = KNearestNeighbor(100) 
+
     #nbm.train(training_set)       
     print "Testing the KNN classifier..."  
     predictions, accuracy = knn.test(training_set,validation_set)
