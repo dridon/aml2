@@ -2,7 +2,7 @@ import preprocessor.sample_counter as sc
 import csv
 from collections import OrderedDict
 
-def get_features(stemming = False, test=False, inbool = False, fsuffix=""):
+def get_features(stemming = False, test=False, inbool = False, fsuffix="", limit = None):
   # input file name 
   ctf= "../Datasets/processed/categories"
   fdf= "../Datasets/processed/filtered_words"
@@ -38,4 +38,7 @@ def get_features(stemming = False, test=False, inbool = False, fsuffix=""):
     scounter.process_sample(r)
     if i % 1000 == 0 : print "\t completed " + str(i) + " samples" 
     i = i  + 1 
+    if limit is not None: 
+      if i - 1 == limit: break 
+
   return (scounter.process_list, scounter.labels)

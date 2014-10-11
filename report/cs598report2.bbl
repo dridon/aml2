@@ -1,3 +1,16 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{citeulike:1472197}
+Genkin, Alexander, Lewis, D.~David, Madigan, and David.
+\newblock {Large-Scale Bayesian Logistic Regression for Text Categorization}.
+\newblock {\em Technometrics}, 49(3):291--304, Aug. 2007.
+
+\bibitem{joachims98a}
+T.~Joachims.
+\newblock Text categorization with support vector machines: learning with many
+  relevant features.
+\newblock In C.~Nedellec and C.~Rouveirol, editors, {\em Proceedings of
+  {ECML}-98, 10th European Conference on Machine Learning}, pages 137--142,
+  Heidelberg et al., 1998. Springer.
 
 \end{thebibliography}

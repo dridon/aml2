@@ -1,3 +1,5 @@
+import scipy.spatial.distance as dist
+
 ################################# Auxliary Metric functions #################################
 
 # This metric returns the sum of absolute value of difference between each element in the array
@@ -17,3 +19,12 @@ def metric_abs(i, j):
             distance = distance + abs(ii-jj)
     # return the distance between i and j        
     return distance
+
+def metric_euclidean(i, j):
+    return dist.euclidean(i,j) 
+
+def metric_manhattan(i, j):
+    return dist.cityblock(i,j)
+
+def metric_cosine(i, j):
+    return dist.cosine(i, j)   

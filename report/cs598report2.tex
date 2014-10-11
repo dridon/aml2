@@ -32,6 +32,12 @@
 \def\@copyrightspace{\relax}
 \makeatother
 
+\usepackage{hyperref}
+\hypersetup{
+     colorlinks   = true,
+     citecolor    = cyan
+}
+
 \begin{document}
 
 \title{Abstract Classification
@@ -89,20 +95,20 @@ Benedicte Leonard-Cannon\\
   \affaddr{McGill University}\\
        %\affaddr{1932 Wallamaloo Lane}\\
       % \affaddr{Wallamaloo, New Zealand}\\
-       \affaddr{benedicte.leonard-cannon@mail.mcgill.ca}       
+       \email{teabennie@gmail.com}       
 % 2nd. author
 \alignauthor
 Faiz Khan \\
  \affaddr{McGill University}\\
       % \affaddr{P.O. Box 1212}\\
       % \affaddr{Dublin, Ohio 43017-6221}\\
-       \affaddr{faiz.khan@mail.mcgill.ca}
+       \email{dridon@gmail.com }
 % 3rd. author
-\alignauthor Sherry  Ruan\\
+\alignauthor Sherry Shanshan Ruan\\
        \affaddr{McGill University}\\
       % \affaddr{1 Th{\o}rv{\"a}ld Circle}\\
      %  \affaddr{Hekla, Iceland}\\
-      \affaddr{shanshan.ruan@mail.mcgill.ca}
+     \email{sherry.s.ruan@gmail.com}
 %\and  % use '\and' if you need 'another row' of author names
 %% 4th. author
 %\alignauthor Lawrence P. Leipuner\\
@@ -150,11 +156,19 @@ TBD
 %\keywords{ACM proceedings, \LaTeX, text tagging} % NOT required for Proceedings
 
 \section{Introduction}
+In text classification we aim at building predictors that classify text documents into a specific category from a given set. Typically this is done by taking an input of text documents and labels for the categories and using those train classifiers to be able to predict those text documents. Our use case specifically deals with classifying an input set of approximately 96,000 abstracts that are labelled as either being from cs, stat, math or physics fields. 
+
+In order to use standard classifiers for these situations we first need to transform the text in to inputs that may be used with standard machine learning algorithms. Many feature engineering strategies such as bag-of-words, bi-grams and n-grams are available. We employed the bag-of-words strategy in the construction of our feature set. 
+
+In preprocessing we tokenize our data using two lexers. We then run a series of filters and transformations. We calculate the number of occurrence of all the words and drop all of the words that occur less than five times in order to cater to limited computational resources. We select our features using univariate feature selection to get the 2,000 words with highest variance using chi-squared. We do this twice, once using stemming and once without. We then generate four datasets with the 2,000 words, binary with/without stemming and bag-of-words with/without stemming. The binary set simply sets a 1 if the word occurs otherwise it leave it at 0 and the bag-of-word sets show the number of occurrences in the abstracts. 
+
+--- Quick mention on classifiers and cross validation
+
+--- Potential uses 
 What is text classification (or categorization)
-
 Briefly describe our methodology
-
 Talk about potential uses?
+
 
 
 
@@ -163,46 +177,41 @@ Talk about potential uses?
 \section{Related Work}
 In the following section, we present existing work conducted by other researchers in the task of text categorization.
 
-Genkin and Lewis[X] proposed a Bayesian lasso logistic regression model for binary text categorization that relied on a Laplace prior to reduce the risk of overfitting. Their approach addressed the impracticality of fitting a standard logistic regression model to a dataset containing a large feature space. More precisely, their training algorithm used prior probability distributions of the model parameters to encourage model sparsity. According to them, this approach produced a compact model that is effective and doesn’t overfit. In practice, their algorithm performed as well as two state-of-the-art categorization models (support vector machines (SVM) and ridge logistic regression) on five standard test sets (ModApte, RCV1-v2, OHSUMED, WebKB and 20 NG).  [Regression: \texttt{http://www.stat.columbia.edu/~madigan/PAPERS/techno.pdf}]
+Genkin and Lewis \cite{citeulike:1472197} proposed a Bayesian lasso logistic regression model for binary text categorization that relied on a Laplace prior to reduce the risk of overfitting. Their approach addressed the impracticality of fitting a standard logistic regression model to a dataset containing a large feature space. More precisely, their training algorithm used prior probability distributions of the model parameters to encourage model sparsity. According to them, this approach produced a compact model that is effective and does not overfit. In practice, their algorithm performed as well as two state-of-the-art categorization models (support vector machines (SVM) and ridge logistic regression) on five standard test sets (ModApte, RCV1-v2, OHSUMED, WebKB and 20 NG). 
 
-Joachims (X) was the first to study the performance of SVMs for text classification in his 1998 paper. Joachims used two SVMs -one based on a polynomial kernel and the other on a radial basis function (RBF) kernel-. He compared both of these models with the following benchmark algorithms: Naive Bayes, Rocchio, k nearest neighbors (k-NN) and C4.5 decision tree. Here again, the performance of these classifiers were assessed through the ModApte and Ohsumed datasets. Prior to fitting, these datasets were reduced to a bag-of-words representation out of which stop-words were discarded. The resulting feature vectors were normalized to unit length and the best features were selected according to their information gain. From the experiments conducted, Joachim concluded that both SVM algorithms outperformed the four benchmark algorithms significantly. \texttt{http://www.cs.cornell.edu/people/tj/publications/joachims 98a.pdf}
-
-Some sources I might use:
-%General: http://nmis.isti.cnr.it/sebastiani/Publications/TM05.pdf
-%N-gram: http://odur.let.rug.nl/vannoord/TextCat/textcat.pdf
-%Bigrams: http://www.cs.ucsb.edu/~yfwang/papers/igm.pdf 
-%Classifier comparison: http://www.inf.ufes.br/~claudine/courses/ct08/artigos/yang_sigir99.pdf
-%Preprocessing: http://www.di.uevora.pt/~pq/papers/enia-goncalves-quaresma.pdf
+Joachims \cite{joachims98a} was the first to study the performance of SVMs for text classification in his 1998 paper. Joachims used two SVMs-one based on a polynomial kernel and the other on a radial basis function (RBF) kernel-. He compared both of these models with the following benchmark algorithms: Naive Bayes, Rocchio, k nearest neighbors (k-NN) and C4.5 decision tree. Here again, the performance of these classifiers were assessed through the ModApte and Ohsumed datasets. Prior to fitting, these datasets were reduced to a bag-of-words representation out of which stop-words were discarded. The resulting feature vectors were normalized to unit length and the best features were selected according to their information gain. From the experiments conducted, Joachim concluded that both SVM algorithms outperformed the four benchmark algorithms significantly.
 
 
 \section{Methodology}
+There is a significant amount of information contained within the collection of abstracts. In order to reduce these into inputs that could be used for standard classifiers, many feature engineering strategies such as bag-of-words, bi-grams and n-grams are available. We employed the bag-of-words strategy in the construction of our feature set. 
+
+Bag of Words
+The bag of words strategy takes a collection of documents and ideally outputs a dictionary of words with a subset of words (not necessarily a proper subset) as keys and a set of ranks from 0...k-1 for a bag of k words. If there are d documents and k words in our samples we create a matrix of shape k x d. Each document  is then scanned for each of the k words in the bag and the number of occurrence of the word (or simply that it occurs)  are recorded in one row as a sample. The matrix is used to then train our classifiers.
+
+In order to construct the bag-of-words, we had to go through a series of preprocessing steps and a final feature selection step. We now discuss these below: 
+
 Data preprocessing
-*Write which libraries were used for each case if applicable*
-Lower case
-Remove punctuation
-Remove stop words
-Stemming
-What else?	
-Feature selection
-Build a dictionary of all words present in abstracts
-Get rid of words occurring less than X times to reduce dimensionality of dataset
-Build 2 dataset based on the dictionary. 1 dataset contains word occurrence/absence for each abstract. Other dataset is bag-of-words.
-Remove features with low variance (scikit learn)
-Univariate feature selection (scikit learn) ?? if we can
+The abstracts were presented in LateX code. This presented an extra challenge on top of typical text processing. We first tokenized the data using a couple of lexers. We then removed punctuation and stop words. We then generate a dictionary of all words encountered throughout the abstracts as the keys with their total occurrence. We do this dictionary with stemming and without stemming. We present this series of steps in more detail: 
 
-Joachims says “aggressive feature selection may result in a loss of information” even if we only discard the least relevant features. Hence, it is best if we keep as many features as we can handle.
+Latex Parsing:
+Library: Pygments 
+We used the latex lexer presented in the pygments [reference]. We modified it to detect alphanumeric words (simply referred to as words for this subsection) in text and commands. We implemented a new lexer using the pygments api to tokenize plain text. We took the tokens from the latex parser and for those identified as words we ran them through the plain text lexer. The plain text lexer identified stopwords, punctuation, numbers and words. 
 
-Algorithm selection
-Multinomial, multivariate Naive Bayes (Bennie write)
-Nearest Neighbor (Sherry write)
-Random forest (Bennie write)
-Try SVMs According to Joachims: “their ability to learn can be independent of the dimensionality of the feature space”
-Optimization (if required)
-?
-Parameter selection
-Laplace smoothing alpha for Bayes.
-k for NN. Other params
-Random forests have 10 params…
+Filtering: 
+Stopwords are common words that occur the context of the documents being processed. We took the most common english words such as “the” or “if” and removed them from our input. We also removed all punctuation, latex equations and commands from the inputs as well. Lastly, we filtered out words with less than three characters. 
+
+Transformation: 
+Library: nltk (Natural Language Toolkit) 
+After filtering, we transformed all words to their lowercase equivalents. We then output two sets after this, one with stemming and without stemming. Stemming is the reduction of words such as “producing”  and “produce” to “produc”. Stemming puts words that are similar together reducing the size of features. However, depending on the aggression of stemming, its possible to loose information or corrupt some pieces of data for example “punctual” and “punctuation” might yield “punct” by a very aggressive stemmer. We used the nltk snowball stemmer for our stemmed dataset [reference].
+
+Word Count Dictionary: 
+At this point we had over 100,000 unique words for non-stemmed and over 70,000 unique words for stemmed. Given that there are ~96,000 samples in our input, we could not generate the counts for all possible words and run it through feature selection due to memory limitations. We created a dictionary of all 100,000 words and their total occurrence throughout the input set. We dropped all possible words that occurred < 5 times throughout all samples. From here we had around 30,000 words to deal with and we proceeded to feature selection. 
+
+Feature Selection: 
+We first used all 30,000 words and generated the number of times they occurred in each abstract to create a matrix of samples against features. Each abstract had one row where the column showed how many times given word for that column occured in that specific abstract. Since we have over 30,000 words and number of words abstracts are in the few hundreds at most then its easy to see that this is a very sparse matrix. We ran a univariate selection algorithm using the chi-squared distribution to get a set of 2,000 words with the highest variance. We did this for both stemmed data sets and unstemmed datasets. We used these 2,000 words in order of presentation by chi-squared as bag-of-words. 
+
+Feature Generation: 
+With our bag of 2,000 words we now go through all the abstracts, preprocess them again and then create a matrix with the 2,000 words as features on the column and their occurrences in the abstracts as the rows. Again we do this for both stemming and non stemming cases. We also generate this data again but instead of number of occurrences of each of the 20,000 words in the abstracts we simply mark a boolean to indicate if it occurred or not. Our final dataset thus has six files. Two bag-of-word files, with words appearing in order of importance, one with stemming and one without stemming. And four feature sets generated from using each of the bag-of-words: binary with stemming, binary non-stemmed, bag-of-words stemmed, bag-of-words non-stemmed.
 
 
 \section{Testing and validation}

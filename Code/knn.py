@@ -33,21 +33,25 @@ class KNearestNeighbor:
         # calculate distance between the test input and every input in the trainset
 
         # Loop over each test input
-        for index_i, example_i in enumerate(testset):  
+        for index_i, example_i in enumerate(testset):
+            print "Finding k nearest neighbors for test input", index_i
             # discard the label (last element)
             input_i = example_i[:-1]  
+            #print input_i
             # initialize the distance list for input i
             distances_i = []  
             # Loop over each example in the dataset
             for index_j, example_j in enumerate(trainset):   
                 # discard the label (last element)
+                #print "Calculating distance to example ", index_j
                 input_j = example_j[:-1]
                 # calculate distances based on a given metric
                 # add the distance between input_i and input_j, as well as the index j into the list
-                distances_i.append((metric_abs(input_i,input_j), index_j))
+                distances_i.append((metric_cosine(input_i,input_j), index_j))
 
             # get k nearest neighbors for input i
             k_neighbors_for_i = sorted(distances_i)[:self.k]
+            #print "K nearest neighbors:", k_neighbors_for_i
 
             # get corresponding labels for these k nearest neighbors
             k_labels_for_i = []
@@ -56,6 +60,7 @@ class KNearestNeighbor:
                 k_labels_for_i.append(trainset[idx][-1])
             # select the majority of labels as a prediction for test input i
             label_for_i = np.argmax(np.bincount(k_labels_for_i))
+            #print "Test input", index_i, "has cateogry: ", label_for_i
             # add this label to a return list
             labels_to_return.append(label_for_i);
 
@@ -98,7 +103,7 @@ class KNearestNeighbor:
                 input_j = example_j[:-1]
                 # calculate distances based on a given metric
                 # add the distance between input_i and input_j, as well as the index j into the list
-                distances_i.append((metric_abs(input_i,input_j), index_j))
+                distances_i.append((metric_cosine(input_i,input_j), index_j))
 
             # get k nearest neighbors for input i
             k_neighbors_for_i = sorted(distances_i)[:self.k]

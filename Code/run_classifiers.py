@@ -72,9 +72,12 @@ def get_k_fold_partition(samples, labels, k = 5):
     
 if __name__ == "__main__":    
 
-    samples, labels = ftg.get_features(stemming=True, test=False, inbool=False)
-    samples = samples[:1000]
-    labels = labels[:1000]
+
+    samples, labels = ftg.get_features(stemming=False, test=False, inbool=False, limit = 1000)
+
+    samples = samples[:10000]
+    labels = labels[:10000]
+
     
     # Testing    
     training_set, validation_set = get_k_fold_partition(samples, labels, 5)
@@ -110,7 +113,7 @@ if __name__ == "__main__":
     print " "            
     
     #print "Training the KNN classifier..."   
-    knn = KNearestNeighbor(2) 
+    knn = KNearestNeighbor(100) 
     #nbm.train(training_set)       
     print "Testing the KNN classifier..."  
     predictions, accuracy = knn.test(training_set,validation_set)
