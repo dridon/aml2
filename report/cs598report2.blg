@@ -3,44 +3,46 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: cs598report2.aux
 The style file: abbrv.bst
 Database file #1: sigproc.bib
-You've used 2 entries,
+Warning--to sort, need author or key in nltk
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            514 strings with 4189 characters,
-and the built_in function-call counts, 949 in all, are:
-= -- 94
-> -- 48
+            529 strings with 4761 characters,
+and the built_in function-call counts, 1756 in all, are:
+= -- 174
+> -- 70
 < -- 1
-+ -- 18
-- -- 16
-* -- 74
-:= -- 157
-add.period$ -- 7
-call.type$ -- 2
-change.case$ -- 13
++ -- 28
+- -- 22
+* -- 94
+:= -- 284
+add.period$ -- 22
+call.type$ -- 6
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 34
-empty$ -- 68
-format.name$ -- 16
-if$ -- 199
+cite$ -- 7
+duplicate$ -- 62
+empty$ -- 157
+format.name$ -- 22
+if$ -- 382
 int.to.chr$ -- 0
-int.to.str$ -- 2
+int.to.str$ -- 6
 missing$ -- 2
-newline$ -- 13
-num.names$ -- 6
-pop$ -- 13
+newline$ -- 36
+num.names$ -- 12
+pop$ -- 53
 preamble$ -- 1
-purify$ -- 11
+purify$ -- 22
 quote$ -- 0
-skip$ -- 26
+skip$ -- 46
 stack$ -- 0
-substring$ -- 67
-swap$ -- 11
+substring$ -- 87
+swap$ -- 15
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
-warning$ -- 0
-while$ -- 10
-width$ -- 3
-write$ -- 26
+type$ -- 24
+warning$ -- 1
+while$ -- 16
+width$ -- 7
+write$ -- 68
+(There was 1 warning)
