@@ -1,3 +1,43 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{nltk}
+Natural language toolkit: Snowball stemmer.
+\newblock \url{http://www.nltk.org/_modules/nltk/stem/snowball.html}.
+\newblock Accessed: 2014-10-11.
+
+\bibitem{citeulike:1472197}
+Genkin, Alexander, Lewis, D.~David, Madigan, and David.
+\newblock {Large-Scale Bayesian Logistic Regression for Text Categorization}.
+\newblock {\em Technometrics}, 49(3):291--304, Aug. 2007.
+
+\bibitem{pygments}
+T.~H. Georg~Brandl, Armin~Ronacher.
+\newblock Python syntax highlighter.
+\newblock \url{http://pygments.org/docs/lexers/}.
+\newblock Accessed: 2014-10-11.
+
+\bibitem{joachims98a}
+T.~Joachims.
+\newblock Text categorization with support vector machines: learning with many
+  relevant features.
+\newblock In C.~Nedellec and C.~Rouveirol, editors, {\em Proceedings of
+  {ECML}-98, 10th European Conference on Machine Learning}, pages 137--142,
+  Heidelberg et al., 1998. Springer.
+
+\bibitem{pineaul5}
+J.~Pineau.
+\newblock Comp 598 - applied machine learning lecture 5: Naive bayes
+  classification.
+\newblock
+  \url{http://www.cs.mcgill.ca/~jpineau/comp598/Lectures/05NaiveBayes-publish.pdf}.
+\newblock Accessed: 2014-10-11.
+
+\bibitem{pineaul9}
+J.~Pineau.
+\newblock Comp 598 - applied machine learning lecture 9: Instance-based
+  learning.
+\newblock
+  \url{http://www.cs.mcgill.ca/~jpineau/comp598/Lectures/09InstanceLearning-publish.pdf}.
+\newblock Accessed: 2014-10-11.
 
 \end{thebibliography}

@@ -2,47 +2,47 @@ This is BibTeX, Version 0.99d (TeX Live 2013)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: cs598report2.aux
 The style file: abbrv.bst
-I found no \citation commands---while reading file cs598report2.aux
 Database file #1: sigproc.bib
-You've used 0 entries,
+Warning--to sort, need author or key in nltk
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            497 strings with 3720 characters,
-and the built_in function-call counts, 18 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 2
-:= -- 7
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
+            529 strings with 4761 characters,
+and the built_in function-call counts, 1756 in all, are:
+= -- 174
+> -- 70
+< -- 1
++ -- 28
+- -- 22
+* -- 94
+:= -- 284
+add.period$ -- 22
+call.type$ -- 6
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 1
+cite$ -- 7
+duplicate$ -- 62
+empty$ -- 157
+format.name$ -- 22
+if$ -- 382
 int.to.chr$ -- 0
-int.to.str$ -- 0
-missing$ -- 0
-newline$ -- 3
-num.names$ -- 0
-pop$ -- 0
+int.to.str$ -- 6
+missing$ -- 2
+newline$ -- 36
+num.names$ -- 12
+pop$ -- 53
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 22
 quote$ -- 0
-skip$ -- 1
+skip$ -- 46
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 87
+swap$ -- 15
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
-warning$ -- 0
-while$ -- 0
-width$ -- 0
-write$ -- 2
-(There was 1 error message)
+type$ -- 24
+warning$ -- 1
+while$ -- 16
+width$ -- 7
+write$ -- 68
+(There was 1 warning)

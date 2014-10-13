@@ -1,0 +1,24 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Related Work}{}% 2
+\BOOKMARK [1][-]{section.3}{Data Preprocessing}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Bag of Words}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Data preprocessing}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Latex Parsing}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.4}{Filtering}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.5}{Transformation}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.6}{Word Count Dictionary}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Feature Design and Selection}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Feature Selection}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Feature Generation}{section.4}% 12
+\BOOKMARK [1][-]{section.5}{Algorithm Selection}{}% 13
+\BOOKMARK [2][-]{subsection.5.1}{Multi-class Naive Bayes}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.2}{K Nearest Neighbors}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.3}{Random Forests}{section.5}% 16
+\BOOKMARK [1][-]{section.6}{Optimization}{}% 17
+\BOOKMARK [1][-]{section.7}{Parameter Selection}{}% 18
+\BOOKMARK [1][-]{section.8}{Testing and Validation}{}% 19
+\BOOKMARK [2][-]{subsection.8.1}{Multi-class Naive Bayes}{section.8}% 20
+\BOOKMARK [2][-]{subsection.8.2}{K Nearest Neighbours}{section.8}% 21
+\BOOKMARK [2][-]{subsection.8.3}{Random Forests}{section.8}% 22
+\BOOKMARK [1][-]{section.9}{Discussion}{}% 23
+\BOOKMARK [1][-]{section.10}{References}{}% 24
