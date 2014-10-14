@@ -1,0 +1,719 @@
+cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.812625250501
+KNN confusion matrix:
+[[278  16   9  19]
+ [ 32  87   4  14]
+ [ 43  10 224  12]
+ [ 22   3   3 222]]
+
+cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.798597194389
+KNN confusion matrix:
+[[284  10   7  21]
+ [ 45  80   0  12]
+ [ 52  10 213  14]
+ [ 25   1   4 220]]
+
+cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.807615230461
+KNN confusion matrix:
+[[279  10   6  27]
+ [ 36  90   1  10]
+ [ 53  13 212  11]
+ [ 20   3   2 225]] 
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.810621242485
+KNN confusion matrix:
+[[280  14   7  21]
+ [ 34  97   1   5]
+ [ 49  12 214  14]
+ [ 23   4   5 218]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.789579158317
+KNN confusion matrix:
+[[270  11  13  28]
+ [ 37  91   2   7]
+ [ 57   8 208  16]
+ [ 26   5   0 219]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.816633266533
+KNN confusion matrix:
+[[284  16   4  18]
+ [ 29  91   6  11]
+ [ 48   7 224  10]
+ [ 28   2   4 216]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.809619238477
+KNN confusion matrix:
+[[277  16   9  20]
+ [ 39  88   3   7]
+ [ 41  10 221  17]
+ [ 22   2   4 222]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.817635270541
+KNN confusion matrix:
+[[272  19  10  21]
+ [ 36  91   3   7]
+ [ 46   6 223  14]
+ [ 13   1   6 230]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.806613226453
+KNN confusion matrix:
+[[281  19   4  18]
+ [ 34  90   4   9]
+ [ 60   5 216   8]
+ [ 29   0   3 218]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=true
+KNN accuracy:  0.814629258517
+KNN confusion matrix:
+[[276  18   6  22]
+ [ 38  90   3   6]
+ [ 49  11 210  19]
+ [ 10   0   3 237]]
+
+ =======================================================================
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.796593186373
+KNN confusion matrix:
+[[275  20   9  18]
+ [ 40  86   3   8]
+ [ 47  15 214  13]
+ [ 17   6   7 220]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.807615230461
+KNN confusion matrix:
+[[277  18   4  23]
+ [ 34  91   4   8]
+ [ 47  15 214  13]
+ [ 18   4   4 224]]
+
+ Testing the KNN classifier...
+cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.809619238477
+KNN confusion matrix:
+[[281  15   4  22]
+ [ 38  88   1  10]
+ [ 41  20 216  12]
+ [ 16   3   8 223]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.801603206413
+KNN confusion matrix:
+[[277  21   1  23]
+ [ 27  97   3  10]
+ [ 45  25 201  18]
+ [ 18   5   2 225]]
+
+cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.797595190381
+KNN confusion matrix:
+[[274  22   4  22]
+ [ 40  88   1   8]
+ [ 55  10 215   9]
+ [ 25   4   2 219]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.786573146293
+KNN confusion matrix:
+[[267  29   2  24]
+ [ 37  94   0   6]
+ [ 55  17 204  13]
+ [ 22   3   5 220]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.790581162325
+KNN confusion matrix:
+[[267  27   7  21]
+ [ 38  90   1   8]
+ [ 51   9 206  23]
+ [ 21   1   2 226]]
+
+cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.805611222445
+KNN confusion matrix:
+[[276  24   3  19]
+ [ 35  95   1   6]
+ [ 50  17 207  15]
+ [ 13   8   3 226]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.789579158317
+KNN confusion matrix:
+[[278  22   2  20]
+ [ 38  90   3   6]
+ [ 53  16 205  15]
+ [ 25   8   2 215]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=true
+KNN accuracy:  0.801603206413
+KNN confusion matrix:
+[[278  22   5  17]
+ [ 31  95   3   8]
+ [ 46  19 211  13]
+ [ 23   6   5 216]]
+
+ ======================================================================
+cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=false
+KNN accuracy:  0.824649298597
+KNN confusion matrix:
+[[281  12   5  24]
+ [ 35  89   5   8]
+ [ 30  13 238   8]
+ [ 25   4   6 215]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=false
+KNN accuracy:  0.814629258517
+KNN confusion matrix:
+[[271  21  11  19]
+ [ 33  91   5   8]
+ [ 34  13 233   9]
+ [ 22   4   6 218]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=false
+KNN accuracy:  0.821643286573
+KNN confusion matrix:
+[[283  15  10  14]
+ [ 31  94   3   9]
+ [ 42  10 227  10]
+ [ 29   2   3 216]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=false
+KNN accuracy:  0.808617234469
+KNN confusion matrix:
+[[271  14   9  28]
+ [ 39  87   4   7]
+ [ 39  15 225  10]
+ [ 21   2   3 224]]
+
+ KNN accuracy:  0.818637274549
+KNN confusion matrix:
+[[273  18  12  19]
+ [ 28  97   4   8]
+ [ 39  17 222  11]
+ [ 16   6   3 225]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=false
+KNN accuracy:  0.819639278557
+KNN confusion matrix:
+[[276  19  12  15]
+ [ 34  86   5  12]
+ [ 33  13 232  11]
+ [ 15   3   8 224]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=false
+KNN accuracy:  0.810621242485
+KNN confusion matrix:
+[[279  10  11  22]
+ [ 37  85   5  10]
+ [ 35  14 225  15]
+ [ 21   2   7 220]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=false
+KNN accuracy:  0.817635270541
+KNN confusion matrix:
+[[280  12   9  21]
+ [ 34  94   3   6]
+ [ 41  14 218  16]
+ [ 13   4   9 224]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=false
+KNN accuracy:  0.828657314629
+KNN confusion matrix:
+[[280  18  10  14]
+ [ 35  91   3   8]
+ [ 29  13 231  16]
+ [ 17   4   4 225]]
+
+cross=3, limit=3000, metric=braycurtis,k=10,stemming=false,inbool=false
+ KNN accuracy:  0.808617234469
+KNN confusion matrix:
+[[271  14  10  27]
+ [ 30  92   3  12]
+ [ 38  11 228  12]
+ [ 20   5   9 216]]
+
+ ======================================================================
+cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.830661322645
+KNN confusion matrix:
+[[275  22   9  16]
+ [ 38  92   3   4]
+ [ 34  17 230   8]
+ [ 16   1   1 232]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.811623246493
+KNN confusion matrix:
+[[278  23   4  17]
+ [ 33  96   2   6]
+ [ 45  12 217  15]
+ [ 19   8   4 219]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.811623246493
+KNN confusion matrix:
+[[272  23   9  18]
+ [ 30 102   2   3]
+ [ 38  20 224   7]
+ [ 25   6   7 212]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.820641282565
+KNN confusion matrix:
+[[277  20   8  17]
+ [ 31  97   2   7]
+ [ 37  23 220   9]
+ [ 15   3   7 225]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.839679358717
+KNN confusion matrix:
+[[286  16   7  13]
+ [ 28 100   2   7]
+ [ 26  20 231  12]
+ [ 19   1   9 221]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.836673346693
+KNN confusion matrix:
+[[289  16   3  14]
+ [ 29 101   2   5]
+ [ 43  15 221  10]
+ [ 14   6   6 224]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.829659318637
+KNN confusion matrix:
+[[272  22   5  23]
+ [ 26 105   0   6]
+ [ 33  14 232  10]
+ [ 18   8   5 219]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.824649298597
+KNN confusion matrix:
+[[287  15   5  15]
+ [ 35  93   1   8]
+ [ 48  18 215   8]
+ [ 14   3   5 228]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.821643286573
+KNN confusion matrix:
+[[277  15   4  26]
+ [ 27 103   3   4]
+ [ 41  15 218  15]
+ [ 19   4   5 222]]
+
+ cross=3, limit=3000, metric=braycurtis,k=10,stemming=true,inbool=false
+KNN accuracy:  0.809619238477
+KNN confusion matrix:
+[[270  22  11  19]
+ [ 30  94   5   8]
+ [ 48  11 214  16]
+ [ 12   3   5 230]]
+
+========================================================================
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  0.813627254509
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  0.808617234469
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  0.800601202405
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  0.802605210421
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  0.808617234469
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  0.813627254509
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  0.812625250501
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  0.788577154309
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  0.784569138277
+
+cross=3, limit=3000, metric=braycurtis,k=5,stemming=true,inbool=false
+KNN accuracy:  
+
+==========================================================================
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.817635270541
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.835671342685
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.802605210421
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.831663326653
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.827655310621
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.827655310621
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.817635270541
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.810621242485
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.820641282565
+
+cross=3, limit=3000, metric=braycurtis,k=20,stemming=true,inbool=false
+KNN accuracy:  0.828657314629
+
+========================================================================
+
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.836673346693
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.835671342685
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.847695390782
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.827655310621
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.832665330661
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.812625250501
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.811623246493
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.830661322645
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.820641282565
+
+cross=3, limit=3000, metric=braycurtis,k=30,stemming=true,inbool=false
+KNN accuracy:  0.818637274549
+
+=========================================================================
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.837675350701
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.814629258517
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.832665330661
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.843687374749
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.823647294589
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.824649298597
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.815631262525
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.833667334669
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.824649298597
+
+cross=3, limit=3000, metric=braycurtis,k=50,stemming=true,inbool=false
+KNN accuracy: 
+0.831663326653
+
+=======================================================================
+
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy:
+0.811623246493
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy: 
+0.833667334669
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy: 
+0.809619238477
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy: 
+0.839679358717
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy: 
+0.831663326653
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy: 
+0.815631262525
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy: 
+0.829659318637
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy: 
+0.828657314629
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy: 
+0.830661322645
+
+cross=3, limit=3000, metric=braycurtis,k=100,stemming=true,inbool=false
+KNN accuracy: 
+0.824649298597
+
+========================================================================
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.829659318637
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.809619238477
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.817635270541
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.818637274549
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.813627254509
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.817635270541
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.824649298597
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.824649298597
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.806613226453
+
+cross=3, limit=3000, metric=braycurtis,k=150,stemming=true,inbool=false
+KNN accuracy: 
+0.802605210421
+
+========================================================================
+
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.817635270541
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.817635270541
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.812625250501
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.821643286573
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.832665330661
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.836673346693
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.830661322645
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.835671342685
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.800601202405
+
+cross=3, limit=3000, metric=braycurtis,k=80,stemming=true,inbool=false
+KNN accuracy: 
+0.819639278557
+
+
+============================================================================
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.450901803607
+
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.513026052104
+
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.508016032064
+
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.565130260521
+
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.468937875752
+
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.483967935872
+
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.554108216433
+
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.558116232465
+
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.562124248497
+
+cross=3, limit=3000, metric=euclidean,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.490981963928
+
+====================================================================
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.441883767535
+
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.336673346693
+
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.438877755511
+
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.367735470942
+
+
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.384769539078
+
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.406813627255
+
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.422845691383
+
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.350701402806
+
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.334669338677
+
+cross=3, limit=3000, metric=manhattan,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.356713426854
+
+======================================================================
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.761523046092
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.784569138277
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.783567134269
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.758517034068
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.785571142285
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.782565130261
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.766533066132
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.774549098196
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.7625250501
+
+cross=3, limit=3000, metric=cosine,k=10,stemming=true,inbool=false
+KNN accuracy: 
+0.763527054108
+
+
+
