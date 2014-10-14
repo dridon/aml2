@@ -58,7 +58,7 @@ def get_k_fold_partition(samples, labels, k = 5):
     if k < 2:  # k must be at least 2
         k = 2
         
-    folds = StratifiedKFold(labels, k) # Generate the fold indexes.
+    folds = StratifiedKFold(labels, k, shuffle=True) # Generate the fold indexes.
     
     # Build the 2 sets:
     for train_index, test_index in folds:
