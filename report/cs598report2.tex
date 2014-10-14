@@ -45,12 +45,10 @@
 \title{Abstract Classification
 % \titlenote{(Does NOT produce the permission block, copyright information nor page numbering). For use with ACM\_PROC\_ARTICLE-SP.CLS. Supported by ACM.}
 }
-\subtitle{[Team PieInThe Sky: COMP 598 Group Project 2]
-\titlenote{The complete dataset of this report is available at
-\texttt{http://www.acm.org/eaddress.htm}
-\\\\
-The implementation of the algorithm described in this report is avaiable at
-\texttt{http://www.acm.org/eaddress.htm}}}
+\subtitle{[Team PieInTheSky: COMP 598 Group Project 2]
+\titlenote{
+The dataset and the implementation of the algorithm described in this report is available at
+\url{https://github.com/dridon/aml2}}}
 %
 % You need the command \numberofauthors to handle the 'placement
 % and alignment' of the authors beneath the title.
@@ -236,29 +234,29 @@ With our bag of 2,000 words we now go through all the abstracts, preprocess them
 \section{Algorithm Selection}
 \subsection{Multi-class Naive Bayes}
 First, we used a Naive Bayes (NB) classifier, whose goal is to predict $p(y|x)$, the probability of obtaining an output $y$ given an input vector $x$. To compute $p(y|x)$, NB uses an extended version of Bayes' rule:
-\[
- p(y| \overrightarrow{x}) \propto \frac{p(y) \prod_{i=1}^n P(x_i | y)}{ p (\overrightarrow{x}) } 
-\]
+\begin{equation}
+ p(y| \overrightarrow{x}) \propto \frac{p(y) \prod_{i=1}^n P(x_i | y)}{ p (\overrightarrow{x}) }   \propto p(y) \prod_{i=1}^n P(x_i | y) \label{eq:nb1}
+\end{equation}
 where we are assuming that all $x_i$ are conditionally independent given $y$ and $p(x)$ is constant since $x$ is given as input. Hence, the probability of each label, $p(y)$, and the relative probabilities of each feature given each label, $p(x_i|y)$, must be computed prior to prediction. In the multi-class scenario, we can individually predict $p(y|x)$ for each label and output the label $y$ bearing the highest probability using formula $X$.
-\[
- \hat{y} = \arg\max_y p (y) \prod_{i=1}^n P(x_i | y)
-\]
+\begin{equation}
+ \hat{y} = \arg\max_y p (y) \prod_{i=1}^n P(x_i | y) \label{eq:nb2}
+\end{equation}
 In this experiment, two versions of the multinomial Naive Bayes classifier were implemented to accommodate both the binary and the bag-of-words training sets. For the former case, we used the Bernoulli variant. Simply put, this classifier handles binary vectors as its input $x$. To find $p(y)$, we divide the amount of examples of label $y$ by the total count of examples. To compute $p(x_i|y)$ for each feature-label pair, we sum the occurrences of $x_i$ equal to $1$ within the examples of label $y$ and divide by the count of examples of label $y$, as shown on formula X, where the additional $1$ and $\alpha$ correspond to Laplace smoothing. 
-\[
-p(x_i | y_j=1) = \frac{(\sum_{i=1}^m \mathds{1}_{x_i=1, y_j=1})+1}{(\sum_{j=1}^m \mathds{1}_{y_j=1}) + \alpha}
-\]
+\begin{equation}
+p(x_i | y_j=1) = \frac{(\sum_{i=1}^m \mathds{1}_{x_i=1, y_j=1})+1}{(\sum_{j=1}^m \mathds{1}_{y_j=1}) + \alpha} \label{eq:nb3}
+\end{equation}
 Finally, we can classify an unlabelled input $x$ using the following formula:
-\[
-p(y|\overrightarrow{x}) = p(y) \prod_{i=1}^n (x_i p(x_i | y) + (1 - x_i) (1 - p(x_i | y))
-\]
+\begin{equation}
+p(y|\overrightarrow{x}) = p(y) \prod_{i=1}^n (x_i p(x_i | y) + (1 - x_i) (1 - p(x_i | y)) \label{eq:nb4}
+\end{equation}
 To handle bag-of-word features, we implemented multivariate NB. This variant of NB takes a vector of integers as its input x. We find $p(x_i|y)$ by summing all features $x_i$ and dividing by the sum of all vector elements over all examples of label $y$ as per EQ $x$ where alpha corresponds to Laplace smoothing.
-\[
-p(x_i | y_j =1) = \frac{(\sum_{i=1}^m x_i \cdot \mathds{1}_{y_j=1} ) + \alpha }{\sum_{k=1}^m(\sum_{i=1}^n (x_{ki}\cdot \mathds{1}_{y_j=1})+\alpha)}
-\]
+\begin{equation}
+p(x_i | y_j =1) = \frac{(\sum_{i=1}^m x_i \cdot \mathds{1}_{y_j=1} ) + \alpha }{\sum_{k=1}^m(\sum_{i=1}^n (x_{ki}\cdot \mathds{1}_{y_j=1})+\alpha)} \label{eq:nb5}
+\end{equation}
 The probability $p(y)$ is computed as in the binary case. To predict the probability of an unlabeled vector $x$, we scale the relative probabilities based on the input counts, according to the following formula:
-\[
-p(y | \overrightarrow{x}) = p(y) \prod_{i=1}^n x_i p(x_i | y)
-\]
+\begin{equation}
+p(y | \overrightarrow{x}) = p(y) \prod_{i=1}^n x_i p(x_i | y) \label{eq:nb6}
+\end{equation}
 After selecting the k nearest neighbors, we then find the corresponding labels of these neighbors and output the majority of labels as the prediction.
 
 In addition to the choice of the metric function, the selection of parameter k is also of great importance. In general, a low k tends to capture the noise in the data. The resulting bias is low but variance is high. On the other hand, a high k reduces the sensitivity to data variation. It generates high bias but low variance \cite{pineaul9}. 
@@ -270,14 +268,22 @@ As to the standard algorithm, we selected k nearest neighbors and fully implemen
 The source code can be viewed at \texttt{knn.py} and \texttt{metric.py}. Since the knn is a lazy learning algorithm, the knn classifier implemented by us does not have a learning function. Instead, it has a prediction function which takes a training dataset (with both features and labels) as well as a test set (with features only) as input. For each data point $x$ in the test set, the classifier searches over the entire known dataset to find k data points which are closest to the point $x$. In order to decide those nearest points, we have to define an appropriate metric over the space. Note that a data point in this case is simply a vector in $\mathbb{Z}^n$ (i.e. an array of n integers) where n is the number of features. As described in the feature selection section, we set $n$ to be $2,000$. 
 
 Suppose two data points are given as $x=(x_1, \cdots, x_n)$, $y=(y_1, \cdots, y_n)$. There are several possible ways of comparing these two vectors in $\mathbb{Z}^n$. One common way is to calculate their Euclidean distance ($L_2$ distance).
-\[d(x,y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}\]
+\begin{equation}
+d(x,y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2} \label{eq:euclidean}
+\end{equation}
 Another method is Manhattan distance ($L_1$ distance), given by 
-\[d(x,y) = \sum_{i=1}^{n} | x_i - y_i |\]
+\begin{equation}
+d(x,y) = \sum_{i=1}^{n} | x_i - y_i | \label{eq:manhattan}
+\end{equation}
 We can also calculate the cosine distance between vectors $x$ and $y$. 
-\[
-d(x,y) = 1 - \frac{x \cdot y}{ \| x \|_2  \| y \}_2}
-\]
+\begin{equation}
+d(x,y) = 1 - \frac{x \cdot y}{ \| x \|_2  \| y \}_2} \label{eq:cosine}
+\end{equation}
 where $\| \cdot \|_2$ is simply $L_2$ norm.
+Finally, Bray-Curtis may also be applied :
+\begin{equation}
+d(x,y) =\frac{ \sum_{i=1}^n  |x_i - y_i|}{ \sum_{i=1}^n  |x_i + y_i|} \label{eq:braycurtis}
+\end{equation}
 
 \subsection{Random Forests}
 Finally, we experimented with the Scikit implementation of random forests. Roughly put, a random forest is built by bagging decision trees that are each trained on a randomized subset of input samples picked with replacement. In the prediction phase, each tree independently  fits an input vector to a single output (called a vote) and the final output of the forest corresponds to the class associated with the majority vote.
@@ -285,9 +291,9 @@ Finally, we experimented with the Scikit implementation of random forests. Rough
 %-------------------------------------- Optimization --------------------------------------%
 \section{Optimization}
 For Naive Bayes, we must maximize the log likelihood (the following formula) in order to know how to evaluate $p(x_i|y)$ and $p(y)$ \cite{pineaul5}. 
-\[
-\log p(y | x) = \sum_{i=1}^n [\log p(y_i) + \sum_{j=1}^m \log p(x_{ij} | y_i)]
-\]
+\begin{equation}
+\log p(y | x) = \sum_{i=1}^n [\log p(y_i) + \sum_{j=1}^m \log p(x_{ij} | y_i)] \label{eq:log}
+\end{equation}
 However, the log likelihood can be optimized by hand prior to implementing the NB training algorithm, resulting in the aforementioned formulae for $p(x_i|y)$ and $p(y)$. As for the k-nn algorithm, no optimization is required since there is no training phase involved. Finally, the random forests are optimized by minimizing the gini impurity or maximizing the information gain, which both measure the quality of a node split. In other words, these criteria favor tests of the highest quality among all potential tests of any given node.
 
 
@@ -304,29 +310,59 @@ Random forests have 10 params
 \newpage
 %-------------------------------------- Testing and Validation --------------------------------------%
 \section{Testing and Validation}
+%-------------graphs for  nb ----------------%
 \subsection{Multi-class Naive Bayes}
 \begin{figure} 
+\includegraphics[width=1\columnwidth]{images/nb_feature_types.png}  \label{fig:n1}
+\caption{Average naive bayes prediction accuracy based on feature types}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\columnwidth]{images/nb_alpha.png}  
+\caption{Average naive bayes prediction accuracy for different $\alpha$} \label{fig:n2}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\columnwidth]{images/nb_feature_count.png}  
+\caption{Average naive bayes prediction accuracy for different feature count} \label{fig:n3}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\columnwidth]{images/conf_matrix.png}  
+\caption{Confustion matrix} \label{fig:matrix}
+\end{figure}
+
+%-------------graphs for  knn ----------------%
+\subsection{K Nearest Neighbours}
+\begin{figure} 
+\includegraphics[width=1\columnwidth]{images/knn_feature_types.png}  \label{fig:k1}
+\caption{Average knn prediction accuracy based on feature types}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\columnwidth]{images/knn_k.png}  
+\caption{Average knn prediction accuracy for different $k$} \label{fig:k2}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=1\columnwidth]{images/knn_metrics.png}  
+\caption{Average knn prediction accuracy for different metrics} \label{fig:k3}
+\end{figure}
+
+%-------------graphs for  rf ----------------%
+\subsection{Random Forests}
+\begin{figure} 
 %\centering
-\includegraphics[width=1\columnwidth]{nb_feature_types.png}  
-%\vskip 2mm
-%\caption{{ \em \textbf{title}}} 
-%explanation\label{fig:1}
-%\centering
-\includegraphics[width=1\columnwidth]{nb_alpha.png}  
+\includegraphics[width=1\columnwidth]{images/rf_feature_types.png}  
+\caption{Average random forest prediction accuracy based on feature types} \label{fig:r1}
 %\vskip 2mm
 %\caption{{ \em \textbf{title}}} 
 %explanation\label{fig:1}
 \end{figure}
 
-\subsection{K Nearest Neighbours}
-
-\subsection{Random Forests}
-\begin{figure} 
-%\centering
-\includegraphics[width=1\columnwidth]{rf_feature_types.png}  
-%\vskip 2mm
-%\caption{{ \em \textbf{title}}} 
-%explanation\label{fig:1}
+\begin{figure}
+\includegraphics[width=1\columnwidth]{images/rf_parameter.png}  
+\caption{Average rf prediction accuracy for different parameter} \label{fig:r2}
 \end{figure}
 
 \section{Discussion}
