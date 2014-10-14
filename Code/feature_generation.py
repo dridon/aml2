@@ -31,7 +31,7 @@ def get_features(stemming = False, test=False, inbool = False, fsuffix="", limit
   if not test: 
     for item in fdr: 
       filtered_words.append((item[:-1], item[-1]))
-    buff = limit if limit is not None else len(filtered_Words)
+    buff = limit if limit is not None else len(filtered_words)
     scounter = sc.SampleCounter(words, categories, booleans=inbool, buff=buff)
   else: 
     for item in fdr: 
