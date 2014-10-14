@@ -72,7 +72,7 @@ def get_k_fold_partition(samples, labels, k = 5):
     
 if __name__ == "__main__":    
 
-    samples, labels = ftg.get_features(stemming=False, test=False, inbool=False, limit = 2000)
+    samples, labels = ftg.get_features(stemming=False, test=False, inbool=False, limit = 2000, feature_size=100)
     
     # Testing    
     training_set, validation_set = get_k_fold_partition(samples, labels, 5)
@@ -117,5 +117,3 @@ if __name__ == "__main__":
     print "KNN accuracy: ", accuracy 
     print "KNN confusion matrix:" 
     get_confusion_matrix(validation_set[:,-1], predictions)
-    
-    

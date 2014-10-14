@@ -2,7 +2,7 @@ import preprocessor.sample_counter as sc
 import csv
 from collections import OrderedDict
 
-def get_features(stemming = False, test=False, inbool = False, fsuffix="", limit = None):
+def get_features(stemming = False, test=False, inbool = False, fsuffix="", limit = None, feature_size = None):
   # input file name 
   ctf= "../Datasets/processed/categories"
   fdf= "../Datasets/processed/filtered_words"
@@ -20,6 +20,7 @@ def get_features(stemming = False, test=False, inbool = False, fsuffix="", limit
 
   print "Loading word dictionary..."
   words = [w[0] for w in awr]
+  if feature_size is not None: words = words[:feature_size]
 
   print "Loading categories..."
   categories = { r[0] : r[1] for r in ctr }
