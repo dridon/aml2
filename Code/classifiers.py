@@ -91,12 +91,17 @@ class NaiveBayesBinary:
         for i in range(len(samples)):    # Loop over each sample
             for j in range(self.class_count):   # Loop over each class
                 class_predictions[j] = self.p_ys[j]   # Get p(y) for class j
+                class_predictions[j] *= np.dot(samples[i,:-1], self.p_xi_given_ys[j]) \
+                + np.dot( np.ones((np.shape(samples[i,:-1]))) - samples[i,:-1], np.ones((np.shape(self.p_xi_given_ys[j]))) - self.p_xi_given_ys[j])
+                """
+                np.dot(samples[i,:-1], self.p_xi_given_ys[j])
                 for k in range(self.feature_count):     # Loop over each feature                        
                     # Multiply p(y) by p(xi|y)       
                     if(samples[i][k] == 1):
                         class_predictions[j] *= self.p_xi_given_ys[j][k] 
                     else:
-                        class_predictions[j] *= 1 - self.p_xi_given_ys[j][k]   
+                        class_predictions[j] *= 1 - self.p_xi_given_ys[j][k]
+                """
                 
             predictions[i] = np.argmax(class_predictions)  # Prediction is class with highest probability.
             
@@ -107,7 +112,7 @@ class NaiveBayesBinary:
 #My implementation is not efficient! Might need to optimize when we use the real dataset.
 class NaiveBayesMultinomial:
     
-    def __init__(self, alpha = 1):
+    def __init__(self, alpha = 1.0):
         """       
         Alpha is used for Laplace smoothing. We could cross-validate over this guy.
         Typical values ]0,1]
@@ -192,7 +197,7 @@ class NaiveBayesMultinomial:
                 class_predictions[j] = self.p_ys[j]  # Get p(y) for class j               
                 
                 # Multiply p(y) by p(xi|y)                    
-                class_predictions[j] += samples[i,:-1] * self.p_xi_given_ys[j]
+                class_predictions[j] += np.dot(samples[i], self.p_xi_given_ys[j])
                 
             predictions[i] = np.argmax(class_predictions)  # Prediction is class with highest probability.
             
@@ -201,7 +206,7 @@ class NaiveBayesMultinomial:
 class RandomForest():
     
     def __init__(self, n_trees=10, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, 
-                 max_features='auto', max_leaf_nodes=None, bootstrap=True, oob_score=False, n_jobs=2, random_state=None,
+                 max_features='auto', max_leaf_nodes=None, bootstrap=True, oob_score=False, n_jobs=-1, random_state=None,
                  verbose=0, min_density=None, compute_importances=None): 
         """
         The random forest has a LOT of parameters. This will be fun to cross-validate.
